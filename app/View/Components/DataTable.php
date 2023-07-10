@@ -12,7 +12,7 @@ class DataTable extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($buttonName = "Cattle")
+    public function __construct($buttonName = null)
     {
         $this->buttonName = $buttonName;
     }

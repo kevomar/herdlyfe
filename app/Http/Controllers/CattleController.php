@@ -14,6 +14,7 @@ class CattleController extends Controller
      */
     public function index()
     {
+
         $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
         $maleCount = $cattle->where('gender', 'bull')->count();
         $femaleCount = $cattle->where('gender', 'female')->count();
@@ -22,6 +23,11 @@ class CattleController extends Controller
         ));
         $cattles = Cattle::where('herd_id', auth()->user()->herd->id)
             ->paginate(10);
+
+        if (request('search')) {
+            $cattle = cattle::where('cattle_name', 'like', '%' . request('search') . '%')
+                ->paginate(10);
+        }
         return view('farmers.cattle.index', [
             'page' => 1,
         ], [
@@ -90,13 +96,22 @@ class CattleController extends Controller
 
         if ($cattle->gender == 'cow') {
             $children = $cattle->breeding->count();
-        }
-        else {
+        } else {
             $children = $cattle->sire->count();
+        }
+
+        if ($cattle->gender == 'cow') {
+            $breeding = $cattle->breeding;
+        } else {
+            $breeding = $cattle->sire;
         }
         return view('farmers.cattle.show', [
             'cattle' => $cattle,
-            'children' => $children
+            'amount' => $amount,
+            'children' => $children,
+            'milks' => $cattle->milk,
+            'medicals' => $cattle->health,
+            'breedings' => $breeding,
         ]);
     }
 
@@ -105,7 +120,10 @@ class CattleController extends Controller
      */
     public function edit(Cattle $cattle)
     {
-        //
+        return view('farmers.cattle.edit', [
+            'cattle' => $cattle,
+            'breeds' => Breed::all(),
+        ]);
     }
 
     /**
@@ -113,7 +131,19 @@ class CattleController extends Controller
      */
     public function update(Request $request, Cattle $cattle)
     {
-        //
+        $this->authorize('update', $cattle);
+        $validatedData = $request->validate([
+            'cattle_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'breed' => 'required|exists:breeds,id',
+            'gender' => 'required|in:bull,cow',
+            'status' => 'required|in:alive,dead',
+        ]);
+
+        $cattle->update($validatedData);
+
+        return to_route('cattle.show', $cattle)
+            ->with('success', 'Cattle updated successfully');
     }
 
     /**
@@ -121,6 +151,10 @@ class CattleController extends Controller
      */
     public function destroy(Cattle $cattle)
     {
-        //
+        $this->authorize('delete', $cattle);
+        $cattle->delete();
+
+        return to_route('cattle.index')
+            ->with('success', 'Cattle deleted successfully');
     }
 }

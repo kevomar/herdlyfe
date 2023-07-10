@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CattleController;
+use App\Http\Controllers\MilkController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('cattle', CattleController::class)
+    ->middleware(['auth', 'verified']);
+Route::resource('milk', MilkController::class)
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

@@ -82,7 +82,7 @@
                                                 <form method="POST" action="{{ route('cattle.destroy', $cattle) }}">
                                                     @csrf
                                                     @method('delete')
-                                                    <x-dropdown-link :href="route('cattle.destroy', $cattle)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    <x-dropdown-link :href="route('cattle.destroy', $cattle)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
                                                         {{ __('Delete') }}
                                                     </x-dropdown-link>
                                                 </form>

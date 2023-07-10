@@ -9,7 +9,7 @@
                         {{ __($cattle->cattle_name.'\'s records') }}
                     </h2>
                 </x-slot>
-                <div class="grid grid-cols-3 grid-rows-4 overflow-auto h-auto gap-4">
+                <div class="grid grid-cols-3 grid-rows-4 overflow-auto gap-4">
                     <div class="col-span-1 row-span-1">
                         <img src="https://placehold.co/400x400.png" alt="{{ $cattle->cattle_name.' image' }}">
                     </div>
@@ -53,14 +53,6 @@
                                 <div class="flex my-2 py-3">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Milk Produced:</h5>
                                     <p class="font-normal text-xl text-gray-700 dark:text-gray-400 ml-4 pt-1">
-                                    @php
-                                        $amount = 0;
-                                    @endphp
-                                    @foreach($cattle->milk as $milk)
-                                        @php
-                                        $amount += $milk->quantity
-                                        @endphp
-                                    @endforeach
                                     {{  __($amount)
                                     }}</p>
                                 </div>
@@ -70,13 +62,156 @@
                         </div>
                     </div>
 
-                    <div class="row-span-2 col-span-3">
+                    <div class="row-span-1 col-span-3 overflow-y-visible h-auto">
                         {{-- Shows the milk records of the cattle --}}
-                        <div class=" relative p-6 bg-white border border-gray-200 rounded-lg shadow w-full dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <x-data-table>
-                                
-                            </x-data-table>                            
+                        @if($cattle->gender == "cow")
+                        <div class="font-bold text-2xl">
+                            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                                {{ __('Milk Records') }}
+                            </h2>
                         </div>
+                        <x-data-table class="h-full">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th></th>
+                                    <th scope="col" class="px-4 py-3">Id</th>
+                                    <th scope="col" class="px-4 py-3">Cattle</th>
+                                    <th scope="col" class="px-4 py-3">Date</th>
+                                    <th scope="col" class="px-4 py-3">Shift</th>
+                                    <th scope="col" class="px-4 py-3">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody class="min-h-full">
+                                @if($milks->count() > 0)
+                                    @foreach($milks as $milk)
+                                    <!--Check if there are milk reecords-->
+                                    <tr class="border-b dark:border-gray-700">
+                                        <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $milk->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
+                                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $milk->id }} </th>
+                                        <td class="px-4 py-3">{{ $milk->cattle->cattle_name }}</td>
+                                        <td class="px-4 py-3">{{ $milk->date}}</td>
+                                        <td class="px-4 py-3">{{ $milk->shift }}</td>
+                                        <td class="px-4 py-3">{{ $milk->quantity }}</td>s
+                                    </tr>
+                                    @endforeach
+                                    @for($i = 0; $i < 5; $i++)
+                                    <!--Add empty rows to fill the table-->
+                                    <tr></tr>
+                                    @endfor
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">
+                                            <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                                                {{ __('No milk records yet') }}
+                                            </h1>
+                                        </td>
+                                    </tr>
+                                @endif
+                                
+                            </tbody>
+                            
+                        </x-data-table>                            
+                        @endif
+
+                    </div>
+
+                    <div class="row-span-1 col-span-3 overflow-auto h-auto">
+                        {{-- Shows the health records of the cattle --}}
+                        @if($cattle->gender == "cow")
+                        <div class="font-bold text-2xl">
+                            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                                {{ __('Health Records') }}
+                            </h2>
+                        </div>
+                        <x-data-table class="h-full">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th></th>
+                                    <th scope="col" class="px-4 py-3">Id</th>
+                                    <th scope="col" class="px-4 py-3">Cattle Name</th>
+                                    <th scope="col" class="px-4 py-3">Date</th>
+                                    <th scope="col" class="px-4 py-3">Disease</th>
+                                    <th scope="col" class="px-4 py-3">Treatment</th>
+                                    <th scope="col" class="px-4 py-3">type</th>
+                                </tr>
+                            </thead>
+                            <tbody class="h-full">
+                                @if($medicals->count() > 0)
+                                    @foreach($medicals as $medical)
+                                    <tr class="border-b dark:border-gray-700">
+                                        <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $medical->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
+                                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $medical->id }} </th>
+                                        <td class="px-4 py-3">{{ $medical->cattle->cattle_name }}</td>
+                                        <td class="px-4 py-3">{{ $medical->date }}</td>
+                                        <td class="px-4 py-3">{{ $medical->disease }}</td>
+                                        <td class="px-4 py-3">{{ $medical->treatment }}</td>
+                                        <td class="px-4 py-3">{{ $medical->type }}</td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">
+                                            <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                                                {{ __('No Health records yet') }}
+                                            </h1>
+                                        </td>
+                                    </tr>
+                                @endif
+                                
+                            </tbody>
+                            
+                        </x-data-table>                            
+                        @endif
+
+                    </div>
+
+                    <div class="row-span-1 col-span-3 overflow-auto h-auto">
+                        {{-- Shows the breeding records of the cattle --}}
+                        @if($cattle->gender == "cow")
+                        <div class="font-bold text-2xl">
+                            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                                {{ __('Breeding Records') }}
+                            </h2>
+                        </div>
+                        <x-data-table>
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th></th>
+                                    <th scope="col" class="px-4 py-3">Id</th>
+                                    <th scope="col" class="px-4 py-3">Cow</th>
+                                    <th scope="col" class="px-4 py-3">Sire</th>
+                                    <th scope="col" class="px-4 py-3">Breeding Date</th>
+                                    <th scope="col" class="px-4 py-3">Expected date of delivery</th>
+                                    <th scope="col" class="px-4 py-3">Actual date of delivery</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($breedings->count() > 0)
+                                    @foreach($breedings as $breeding)
+
+                                    <tr class="border-b dark:border-gray-700">
+                                        <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $breeding->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
+                                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $breeding->id }} </th>
+                                        <td class="px-4 py-3">{{ $breeding->cattle->cattle_name }}</td>
+                                        <td class="px-4 py-3">{{ $breeding->sire->cattle_name }}</td>
+                                        <td class="px-4 py-3">{{ $breeding->date_of_breeding }}</td>
+                                        <td class="px-4 py-3">{{ $breeding->expected_date_of_delivery }}</td>
+                                        <td class="px-4 py-3">{{ $breeding->actual_date_of_delivery }}</td>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">
+                                            <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                                                {{ __('No Breeding records yet') }}
+                                            </h1>
+                                        </td>
+                                    </tr>
+                                @endif
+                                
+                            </tbody>
+                            
+                        </x-data-table>                            
+                        @endif
 
                     </div>
                 </div>
