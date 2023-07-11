@@ -127,6 +127,9 @@ class MilkController extends Controller
         ]);
 
         $milk->update($validated);
+
+        return to_route('milk.index')
+            ->with('success', 'milk record updated succesfully');
     }
 
     /**

@@ -16,7 +16,7 @@ class Health extends Model
         'date',
         'disease',
         'treatment',
-        'type',
+        'medicine_type',
     ];
 
     protected $casts = [

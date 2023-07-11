@@ -97,10 +97,11 @@
                                 @endforeach
                                
                             </tbody>
+                        </table>
+                            <nav class="p-4 mt-10" aria-label="Table navigation">
+                                {{ $cattles->links() }}
+                            </nav>
                         </x-data-table>
-                    <nav class="p-4 mt-10" aria-label="Table navigation">
-                        {{ $cattles->links() }}
-                    </nav>
                 </div>
             </div>
             </section>
