@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CattleController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\MilkController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,9 @@ Route::resource('milk', MilkController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('medical', HealthController::class)
+    ->middleware(['auth', 'verified']);
+
+Route::resource('feeds', FeedController::class)
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

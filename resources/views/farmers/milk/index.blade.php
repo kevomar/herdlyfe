@@ -1,4 +1,9 @@
 <x-farmer-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Milk Records') }}
+        </h2>
+    </x-slot>
     <div class="p-4 sm:ml-64">
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">

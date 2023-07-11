@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('herd_id')->constrained()->cascadeOnDelete();
             $table->string('feed_name');
             $table->unsignedBigInteger('quantity');
+            $table->date('purchase_date');
             $table->unsignedBigInteger('unit_price');
             $table->unsignedBigInteger('total_price');
             $table->timestamps();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
@@ -12,7 +13,20 @@ class FeedController extends Controller
      */
     public function index()
     {
-        //
+        $herdId = auth()->user()->herd->id;
+        $feeds = Feed::where('herd_id', $herdId)
+            ->latest()
+            ->paginate(10);
+
+        if (request('search')) {
+            $feeds = Feed::where('feed_name', 'like', '%' . request('search') . '%')
+                ->orWhere('price', 'like', '%' . request('search') . '%')
+                ->paginate(10);
+        }
+
+        return view('farmers.feeds.index', [
+            'feeds' => $feeds,
+        ]);
     }
 
     /**
@@ -20,7 +34,7 @@ class FeedController extends Controller
      */
     public function create()
     {
-        //
+        return view('farmers.feeds.create');
     }
 
     /**
@@ -28,7 +42,26 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'feed_name' => 'required',
+            'quantity' => 'required',
+            'unit_price' => 'required',
+        ]);
+
+        //calculate totoal price
+        $total_price = $request->quantity * $request->unit_price;
+
+        $feed = Feed::create([
+            'herd_id' => Auth::user()->herd->id,
+            'feed_name' => $request->feed_name,
+            'quantity' => $request->quantity,
+            'unit_price' => $request->unit_price,
+            'total_price' => $total_price,
+        ]);
+        $feed->save();
+
+        return to_route('feeds.index')
+            ->with('success', 'Feed added successfully');
     }
 
     /**
@@ -36,7 +69,7 @@ class FeedController extends Controller
      */
     public function show(Feed $feed)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -44,7 +77,9 @@ class FeedController extends Controller
      */
     public function edit(Feed $feed)
     {
-        //
+        return view('farmers.feeds.edit', [
+            'feed' => $feed,
+        ]);
     }
 
     /**
@@ -52,7 +87,20 @@ class FeedController extends Controller
      */
     public function update(Request $request, Feed $feed)
     {
-        //
+        $this->authorize('update', $feed);
+
+        $validated = $request->validate([
+            'feed_name' => 'required',
+            'quantity' => 'required',
+            'unit_price' => 'required',
+        ]);
+
+        $feed->update($validated, [
+            'total_price' => $request->quantity * $request->unit_price,
+        ]);
+
+        return to_route('feeds.index')
+            ->with('success', 'Feed updated successfully');
     }
 
     /**
@@ -60,6 +108,11 @@ class FeedController extends Controller
      */
     public function destroy(Feed $feed)
     {
-        //
+        $this->authorize('delete', $feed);
+
+        $feed->delete();
+
+        return to_route('feeds.index')
+            ->with('success', 'Feed deleted successfully');
     }
 }

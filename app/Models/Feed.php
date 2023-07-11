@@ -15,6 +15,7 @@ class Feed extends Model
         'herd_id',
         'feed_name',
         'quantity',
+        'purchase_date',
         'unit_price',
         'total_price',
     ];
