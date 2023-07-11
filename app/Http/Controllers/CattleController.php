@@ -25,7 +25,7 @@ class CattleController extends Controller
             ->paginate(10);
 
         if (request('search')) {
-            $cattle = cattle::where('cattle_name', 'like', '%' . request('search') . '%')
+            $cattles = cattle::where('cattle_name', 'like', '%' . request('search') . '%')
                 ->paginate(10);
         }
         return view('farmers.cattle.index', [
@@ -56,11 +56,11 @@ class CattleController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'cattle_name' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
             'breed' => 'required|exists:breeds,id',
-            'herd' => 'required|exists:herds,id',
             'gender' => 'required|in:bull,cow',
             'status' => 'required|in:alive,dead',
         ]);
@@ -77,9 +77,7 @@ class CattleController extends Controller
         // $request->user()->cattle()->create($validatedData);
         $cattle->save();
 
-        $lastPage = cattle::paginate(10)->lastPage();
-
-        return redirect(route('cattle.index', ['page' => $lastPage]))
+        return redirect(route('cattle.index'))
             ->with('success', 'Cattle added successfully');
     }
 

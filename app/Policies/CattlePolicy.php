@@ -11,7 +11,7 @@ class CattlePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user)
     {
         //
     }
@@ -19,7 +19,7 @@ class CattlePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Cattle $cattle): bool
+    public function view(User $user, Cattle $cattle)
     {
         //
     }
@@ -27,7 +27,7 @@ class CattlePolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user)
     {
         //
     }
@@ -51,7 +51,7 @@ class CattlePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Cattle $cattle): bool
+    public function restore(User $user, Cattle $cattle)
     {
         //
     }
@@ -59,7 +59,7 @@ class CattlePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Cattle $cattle): bool
+    public function forceDelete(User $user, Cattle $cattle)
     {
         //
     }

@@ -27,7 +27,7 @@
 
                 </div>
                 
-                <x-data-table buttonName="Cattle">
+                <x-data-table buttonName="Cattle" resource="cattle">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th></th>
@@ -63,7 +63,7 @@
                                         </span>
                                     </td>
                                     <td class="px-4 py-3 flex items-center">
-                                        <x-dropdown class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                        <x-dropdown>
                                             <x-slot name="trigger">
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 text-center" viewBox="0 0 20 20" fill="currentColor">
@@ -105,12 +105,6 @@
             </div>
             </section>
      </div>
-     @if(session()->has('success'))
-     <div class="fixed top-0 left-1/2 transform -translate-x-1/2 fade show bg-green-500 text-white p-6"
-     role="alert" x-data="{show: true}" x-init="setTimeout(() => show = false, 2000)" x-show="show">
-        <strong>Success!</strong> {{ session()->get('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-     </div>
-     @endif
+    
 
 </x-farmer-layout>

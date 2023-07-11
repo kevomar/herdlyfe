@@ -9,12 +9,14 @@ use Illuminate\View\Component;
 class DataTable extends Component
 {
     public $buttonName;
+    public $resource;
     /**
      * Create a new component instance.
      */
-    public function __construct($buttonName = null)
+    public function __construct($buttonName = null, $resource = 'cattle')
     {
         $this->buttonName = $buttonName;
+        $this->resource = $resource;
     }
 
     /**
