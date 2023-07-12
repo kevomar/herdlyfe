@@ -14,9 +14,7 @@ class FeedController extends Controller
     public function index()
     {
         $herdId = auth()->user()->herd->id;
-        $feeds = Feed::where('herd_id', $herdId)
-            ->latest()
-            ->paginate(10);
+        $feeds = Feed::all()
 
         if (request('search')) {
             $feeds = Feed::where('feed_name', 'like', '%' . request('search') . '%')
@@ -24,7 +22,7 @@ class FeedController extends Controller
                 ->paginate(10);
         }
 
-        return view('farmers.feeds.index', [
+        return view('admin.feeds.index', [
             'feeds' => $feeds,
         ]);
     }
@@ -34,7 +32,7 @@ class FeedController extends Controller
      */
     public function create()
     {
-        return view('farmers.feeds.create');
+        return view('admin.feeds.create');
     }
 
     /**
@@ -78,7 +76,7 @@ class FeedController extends Controller
      */
     public function edit(Feed $feed)
     {
-        return view('farmers.feeds.edit', [
+        return view('admin.feeds.edit', [
             'feed' => $feed,
         ]);
     }

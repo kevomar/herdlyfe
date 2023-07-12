@@ -23,8 +23,7 @@ class HealthController extends Controller
         //get the cattle in the herd
         $cattle = $herd->cattle;
         //get the medical recors whose cattle id are in the collected cattle data
-        $medicals = Health::whereIn('cattle_id', $cattle->pluck('id'))
-            ->paginate(10);
+        $medicals = Health::paginate(10);
 
         if (request('search')) {
             //get the id of the cattle's name that matches the search query
@@ -45,7 +44,7 @@ class HealthController extends Controller
             }
         }
 
-        return view('farmers.medical.index', [
+        return view('admin.medical.index', [
             'medicals' => $medicals,
         ]);
     }
@@ -56,7 +55,7 @@ class HealthController extends Controller
     public function create()
     {
         $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
-        return view('farmers.medical.create', [
+        return view('admin.medical.create', [
             'cattles' => $cattle,
         ]);
     }
@@ -102,7 +101,7 @@ class HealthController extends Controller
     public function edit(Health $medical)
     {
         $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
-        return view('farmers.medical.edit', [
+        return view('admin.medical.edit', [
             'medical' => $medical,
             'cattles' => $cattle
         ]);

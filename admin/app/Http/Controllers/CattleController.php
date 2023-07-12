@@ -15,20 +15,19 @@ class CattleController extends Controller
     public function index()
     {
 
-        $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
+        $cattle = Cattle::all();
         $maleCount = $cattle->where('gender', 'bull')->count();
         $femaleCount = $cattle->where('gender', 'female')->count();
         $averageAge = round($cattle->avg(
             fn ($cattle) => $cattle->date_of_birth->diffInYears(now())
         ));
-        $cattles = Cattle::where('herd_id', auth()->user()->herd->id)
-            ->paginate(10);
+        $cattles = Cattle::paginate(10);
 
         if (request('search')) {
             $cattles = cattle::where('cattle_name', 'like', '%' . request('search') . '%')
                 ->paginate(10);
         }
-        return view('farmers.cattle.index', [
+        return view('admin.cattle.index', [
             'page' => 1,
         ], [
             'cattles' => $cattles,
@@ -45,7 +44,7 @@ class CattleController extends Controller
     {
         $breeds = Breed::all();
         $herds = Herd::all();
-        return view('farmers/cattle/create', [
+        return view('admin/cattle/create', [
             'breeds' => $breeds,
             'herds' => $herds
         ]);
@@ -103,7 +102,7 @@ class CattleController extends Controller
         } else {
             $breeding = $cattle->sire;
         }
-        return view('farmers.cattle.show', [
+        return view('admin.cattle.show', [
             'cattle' => $cattle,
             'amount' => $amount,
             'children' => $children,
@@ -118,7 +117,7 @@ class CattleController extends Controller
      */
     public function edit(Cattle $cattle)
     {
-        return view('farmers.cattle.edit', [
+        return view('admin.cattle.edit', [
             'cattle' => $cattle,
             'breeds' => Breed::all(),
         ]);

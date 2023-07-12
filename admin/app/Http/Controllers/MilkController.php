@@ -17,9 +17,7 @@ class MilkController extends Controller
         $user = Auth::user();
         $herdId = $user->herd->id;
         //get the milk records whose cattle belong to the owner
-        $milk = Milk::whereHas('cattle', function ($query) use ($herdId) {
-            $query->where('herd_id', $herdId);
-        })->with('cattle', 'cattle.herd', 'cattle.herd.user')->paginate(10);
+        $milk = Milk::paginate(10);
         // $milk = Milk::where(
         //     'cattle->id',
         //     $herd->cattle->id
@@ -49,7 +47,7 @@ class MilkController extends Controller
             }
         }
 
-        return view('farmers/milk/index', [
+        return view('admin/milk/index', [
             'milks' => $milk,
         ]);
     }
@@ -61,7 +59,7 @@ class MilkController extends Controller
     {
         $cattles = Cattle::where('herd_id', auth()->user()->herd->id)->get();
         return view(
-            'farmers.milk.create',
+            'admin.milk.create',
             [
                 'cattles' => $cattles
             ]
@@ -107,7 +105,7 @@ class MilkController extends Controller
     public function edit(Milk $milk)
     {
         $cattles = Cattle::where('herd_id', auth()->user()->herd->id)->get();
-        return view('farmers.milk.edit', [
+        return view('admin.milk.edit', [
             'milk' => $milk,
             'cattles' => $cattles,
         ]);
