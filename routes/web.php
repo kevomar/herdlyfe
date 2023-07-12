@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BreedingController;
 use App\Http\Controllers\CattleController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HealthController;
@@ -37,6 +38,9 @@ Route::resource('medical', HealthController::class)
 
 Route::resource('feeds', FeedController::class)
     ->middleware(['auth', 'verified']);
+
+// Route::resource('breeding', BreedingController::class)
+//     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

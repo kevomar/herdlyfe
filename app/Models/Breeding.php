@@ -11,9 +11,7 @@ class Breeding extends Model
 {
     use HasFactory, SoftDeletes;
 
-    use HasFactory;
-
-    protected $fillables = [
+    protected $fillable = [
         'cattle_id',
         'sire_id',
         'date_of_breeding',
