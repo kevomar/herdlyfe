@@ -14,7 +14,7 @@ class Herd extends Model
 
     public function user(): BelongsTo
     {
-        //herd belongs to a user
+        //herd belongs to one user
         return $this->belongsTo(User::class);
     }
 

@@ -109,7 +109,7 @@
                                     {{-- <td class="px-4 py-3">{{ $feed->herd->herd_name }}</td> --}}
                                     <td class="px-4 py-3">{{ $feed->feed_name}}</td>
                                     <td class="px-4 py-3">{{ $feed->quantity }}</td>
-                                    <td class="px-4 py-3">{{ $feed->created_at }}</td>
+                                    <td class="px-4 py-3">{{ $feed->purchase_date }}</td>
                                     <td class="px-4 py-3">{{ $feed->unit_price }}</td>
                                     <td class="px-4 py-3">{{ $feed->total_price }}</td>
                                    

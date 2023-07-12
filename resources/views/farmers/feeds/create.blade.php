@@ -23,9 +23,9 @@
                             <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                         </div>
                         <div class="mb-4">
-                            <x-input-label for="date" :value="__('Date')" />
-                            <x-text-input id="date" class="block mt-1 w-full" type="date" name="date" :value="old('date')" required />
-                            <x-input-error :messages="$errors->get('date')" class="mt-2" />
+                            <x-input-label for="purchase_date" :value="__('Date')" />
+                            <x-text-input id="purchase_date" class="block mt-1 w-full" type="date" name="purchase_date" :value="old('purchase_date')" required />
+                            <x-input-error :messages="$errors->get('purchase_date')" class="mt-2" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="unit_price" :value="__('Unit Price')" />

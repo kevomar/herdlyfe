@@ -55,6 +55,7 @@ class FeedController extends Controller
             'herd_id' => Auth::user()->herd->id,
             'feed_name' => $request->feed_name,
             'quantity' => $request->quantity,
+            'purchase_date' => $request->purchase_date,
             'unit_price' => $request->unit_price,
             'total_price' => $total_price,
         ]);
