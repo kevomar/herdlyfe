@@ -62,7 +62,12 @@ To install and run the Herdlyfe website from GitHub, follow these steps:
     ```
     php artisan serve
     ```
-7. Access the Website: Once the server is up and running, open your web browser and navigate to
+7. Compile your assets
+      ```
+      npm run dev
+      ```
+   
+9. Access the Website: Once the server is up and running, open your web browser and navigate to
    
    ```
    http://localhost:8000
