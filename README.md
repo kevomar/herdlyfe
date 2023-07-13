@@ -28,45 +28,45 @@ To install and run the Herdlyfe website from GitHub, follow these steps:
 
 1. Clone the Repository: Open the command line interface and navigate to the desired directory where you want to store the project. Then, run the following command to clone the repository:
    
-   
+   ```
    git clone https://github.com/kevomar/herdlyfe.git
-   
+   ```
    
 2. Install Dependencies: Once the repository is cloned, navigate into the project directory using the command line and install the required dependencies by running the following commands:
    
-   
+   ```
    composer install
    npm install
-   
+   ```
    
 3. Configure the Environment: Set up the necessary environment variables by creating a `.env` file based on the provided `.env.example` file. Configure the database connection details and any other required variables.
    
-   
+   ```
    Rename the .env.example file to .env
-   
+   ```
    
 4. Run the database migrations:
    
-    
+    ```
     php artisan migrate
-    
+    ```
 
 5. Generate Application Key: Generate the application key by running the following command:
    
-   
+   ```
    php artisan key:generate
-   
+   ```
     
 6. Start the development server:
    
-    
+    ```
     php artisan serve
-    
+    ```
 7. Access the Website: Once the server is up and running, open your web browser and navigate to
    
-   
+   ```
    http://localhost:8000
-   
+   ```
    
    or the specified URL. You should now be able to access and use the Herdlyfe website.
    
