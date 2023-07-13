@@ -1,38 +1,36 @@
-<x-farmer-layout>
+<x-app-layout>
 
-    <div class="p-4 sm:ml-64">
-        <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-            <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
                 {{-- insert a div to display the number of cattle --}}
                 <x-slot name="header">
-                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    <h2 class="font-semibold text-xl text-gray-800  leading-tight">
                         {{ __('My Cattle') }}
                     </h2>
                 </x-slot>
             
                 <div class="flex justify-around mb-3">
-                    <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Number of cattle</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400 text-center">{{ $cattles->total() }}</p>
+                    <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  text-center">Number of cattle</h5>
+                        <p class="font-normal text-gray-700  text-center">{{ $cattles->total() }}</p>
                     </div>
-                    <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Males: </h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400 text-center">{{ $maleCount }}</p>
+                    <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  text-center">Males: </h5>
+                        <p class="font-normal text-gray-700  text-center">{{ $maleCount }}</p>
                     </div>
-                    <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Average age:</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400 text-center">{{ $averageAge.' Years' }}</p>
+                    <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-center">Average age:</h5>
+                        <p class="font-normal text-gray-700 text-center">{{ $averageAge.' Years' }}</p>
                     </div>
 
                 </div>
                 
                 <x-data-table buttonName="Cattle" resource="cattle">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
                                     <th></th>
                                     <th scope="col" class="px-4 py-3">Id</th>
                                     <th scope="col" class="px-4 py-3">Name</th>
+                                    <th scope="col" class="px-4 py-3">Owner</th>
                                     <th scope="col" class="px-4 py-3">Breed</th>
                                     <th scope="col" class="px-4 py-3">Age</th>
                                     <th scope="col" class="px-4 py-3">Gender</th>
@@ -44,10 +42,11 @@
                             </thead>
                             <tbody>
                                 @foreach($cattles as $cattle)
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $cattle->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $cattle->id }} </th>
+                                <tr class="border-b">
+                                    <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $cattle->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 "></td>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{ $cattle->id }} </th>
                                     <td class="px-4 py-3">{{ $cattle->cattle_name }}</td>
+                                    <td class="px-4 py-3">{{ $cattle->herd->user->first_name.''.$cattle->herd->user->last_name }}</td>
                                     <td class="px-4 py-3">{{ $cattle->breed->breed_name }}</td>
                                     @php
                                         // Assuming $cattle is the Cattle model instance with the date_of_birth attribute
@@ -58,7 +57,7 @@
                                     <td class="px-4 py-3">{{ $age }}</td>
                                     <td class="px-4 py-3">{{ $cattle->gender }}</td>
                                     <td class="px-4 py-3">
-                                        <span class="px-2 py-1 font-semibold leading-tight {{ $cattle->status == 'alive' ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100' }} rounded-full dark:bg-green-700 dark:text-green-100 dark:bg-opacity-25">
+                                        <span class="px-2 py-1 font-semibold leading-tight {{ $cattle->status == 'alive' ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100' }} rounded-full">
                                             {{ $cattle->status }}
                                         </span>
                                     </td>
@@ -99,7 +98,7 @@
                             </tbody>
                         </table>
                             <nav class="p-4 mt-10" aria-label="Table navigation">
-                                {{ $cattles->links() }}
+                                {{ $cattles->links('vendor.pagination.simple-bootstrap-4') }}
                             </nav>
                         </x-data-table>
                 </div>
@@ -108,4 +107,4 @@
      </div>
     
 
-</x-farmer-layout>
+</x-app-layout>

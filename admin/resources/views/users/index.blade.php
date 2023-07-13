@@ -1,52 +1,70 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Users') }}
+        <h2 class="font-semibold text-xl text-gray-800  leading-tight">
+            {{ __('Users') }}
+        </h2>
     </x-slot>
-
-    <div class="mb-4 inline-flex overflow-hidden w-full bg-white rounded-lg shadow-md">
-        <div class="flex justify-center items-center w-12 bg-blue-500">
-            <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"></path>
-            </svg>
-        </div>
-
-        <div class="px-4 py-2 -mx-3">
-            <div class="mx-3">
-                <span class="font-semibold text-blue-500">Info</span>
-                <p class="text-sm text-gray-600">Sample table page</p>
+                <!-- Start coding here -->
+                <x-data-table buttonName="Users" resource="user">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                        <tr>
+                            <th></th>
+                            <th scope="col" class="px-4 py-3">Id</th>
+                            <th scope="col" class="px-4 py-3">Name</th>
+                            <th scope="col" class="px-4 py-3">email</th>
+                            <th scope="col" class="px-4 py-3">phone number</th>
+                            <th scope="col" class="px-4 py-3">date of birth</th>
+                            <th scope="col" class="px-4 py-3">gender</th>
+                            <th scope="col" class="px-4 py-3">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr class="border-b ">
+                            <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $user->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 "></td>
+                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{ $user->id }} </th>
+                            <td class="px-4 py-3">{{ $user->first_name.' '.$user->last_name }}</td>
+                            <td class="px-4 py-3">{{ $user->email}}</td>
+                            <td class="px-4 py-3">{{ $user->phone_number }}</td>
+                            <td class="px-4 py-3">{{ $user->date_of_birth }}</td>
+                            <td class="px-4 py-3">{{ $user->gender }}</td>
+                                <td class="px-4 py-3">
+                                    <x-dropdown>
+                                        <x-slot name="trigger">
+                                            <button>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 text-center" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                </svg>
+                                            </button>
+                                        </x-slot>
+                                        <x-slot name="content">
+                                            
+                                            <x-dropdown-link :href="route('milk.edit', $user)">
+                                                {{ __('Edit') }}  
+                                            </x-dropdown-link>
+                                            
+                                            <form method="POST" action="{{ route('milk.destroy', $user) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <x-dropdown-link :href="route('milk.destroy', $user)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
+                                                    {{ __('Delete') }}
+                                                </x-dropdown-link>
+                                            </form>
+                                        </x-slot>
+                                    </x-dropdown>
+                                </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                    <nav class="p-4 mt-3">
+                        {{ $users->links() }}
+                    </nav>
+                </x-data-table>
+                
             </div>
-        </div>
-    </div>
-
-    <div class="inline-block overflow-hidden min-w-full rounded-lg shadow">
-        <table class="min-w-full leading-normal">
-            <thead>
-            <tr>
-                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                    Name
-                </th>
-                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                    Email
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($users as $user)
-                <tr>
-                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                        <p class="text-gray-900 whitespace-no-wrap">{{ $user->name }}</p>
-                    </td>
-                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                        <p class="text-gray-900 whitespace-no-wrap">{{ $user->email }}</p>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-
-        <div class="flex flex-col items-center px-5 py-5 bg-white border-t xs:flex-row xs:justify-between">
-            {{ $users->links() }}
-        </div>
-    </div>
-
+            </section>
+     </div>
 </x-app-layout>

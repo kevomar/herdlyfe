@@ -4,6 +4,7 @@ use App\Http\Controllers\BreedingController;
 use App\Http\Controllers\CattleController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HealthController;
+use App\Http\Controllers\MarketController;
 use App\Http\Controllers\MilkController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,9 @@ Route::resource('medical', HealthController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('feeds', FeedController::class)
+    ->middleware(['auth', 'verified']);
+
+Route::resource('market', MarketController::class)
     ->middleware(['auth', 'verified']);
 
 // Route::resource('breeding', BreedingController::class)

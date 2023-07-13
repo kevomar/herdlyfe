@@ -72,4 +72,10 @@ class Cattle extends Model
         //cattle can have many sale records
         return $this->hasMany(Sale::class);
     }
+
+    public function market()
+    {
+        //can can belog to one market
+        return $this->hasMany(Market::class, 'cattle_id');
+    }
 }

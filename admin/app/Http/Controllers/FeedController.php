@@ -14,7 +14,7 @@ class FeedController extends Controller
     public function index()
     {
         $herdId = auth()->user()->herd->id;
-        $feeds = Feed::all()
+        $feeds = Feed::all();
 
         if (request('search')) {
             $feeds = Feed::where('feed_name', 'like', '%' . request('search') . '%')
