@@ -10,7 +10,7 @@
                         {{ __('My Cattle') }}
                     </h2>
                 </x-slot>
-            
+                @if($cattles)
                 <div class="flex justify-around mb-3">
                     <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Number of cattle</h5>
@@ -43,6 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($cattles->count() > 0)
                                 @foreach($cattles as $cattle)
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $cattle->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
@@ -91,18 +92,39 @@
 
                                     </td>
                                 </tr>
+                               
 
                                 
                                 
                                 @endforeach
+                                @else
+                                <tr class="font-bold text-3xl block items-center">
+                                    <td clas="text-center ml-1/2">
+                                        No Cattle Available
+                                    </td>
+                                </tr>
+                                @endif
                                
                             </tbody>
                         </table>
+                                
                             <nav class="p-4 mt-10" aria-label="Table navigation">
                                 {{ $cattles->links() }}
                             </nav>
+                            
                         </x-data-table>
+                        
                 </div>
+                @else
+                <div class="flex justify-center">
+                    <div class="block p-6 bg-white border border-gray-200 rounded-lg shadow w-full hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                            {{ __('No cattle records yet') }}
+                        </h1>
+                    </div>
+
+                    {{-- Add a central button to add cattle --}}
+                @endif
             </div>
             </section>
      </div>

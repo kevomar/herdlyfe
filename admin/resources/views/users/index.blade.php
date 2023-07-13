@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
                 <!-- Start coding here -->
-                <x-data-table buttonName="Users" resource="user">
+                <x-data-table resource="user">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                         <tr>
                             <th></th>

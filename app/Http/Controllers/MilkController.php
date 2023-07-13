@@ -14,6 +14,12 @@ class MilkController extends Controller
      */
     public function index()
     {
+
+        if (!auth()->user()->herd->cattle) {
+            return view('farmers/milk/index', [
+                'milks' => null,
+            ]);
+        }
         $user = Auth::user();
         $herdId = $user->herd->id;
         //get the milk records whose cattle belong to the owner
@@ -25,6 +31,7 @@ class MilkController extends Controller
         //     $herd->cattle->id
         // )->latest('date', 'shift')
         //     ->paginate(10);
+        
 
         if (request('search')) {
 

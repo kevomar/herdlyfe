@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,8 @@ class FeedController extends Controller
      */
     public function index()
     {
-        $herdId = auth()->user()->herd->id;
-        $feeds = Feed::all();
+        //$herdId = auth()->user()->herd->id;
+        $feeds = Feed::paginate(10);
 
         if (request('search')) {
             $feeds = Feed::where('feed_name', 'like', '%' . request('search') . '%')
@@ -32,7 +33,9 @@ class FeedController extends Controller
      */
     public function create()
     {
-        return view('admin.feeds.create');
+        return view('admin.feeds.create', [
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -86,7 +89,6 @@ class FeedController extends Controller
      */
     public function update(Request $request, Feed $feed)
     {
-        $this->authorize('update', $feed);
 
         $validated = $request->validate([
             'feed_name' => 'required',
@@ -107,7 +109,6 @@ class FeedController extends Controller
      */
     public function destroy(Feed $feed)
     {
-        $this->authorize('delete', $feed);
 
         $feed->delete();
 

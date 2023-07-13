@@ -8,7 +8,7 @@
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
-            
+                @if($medicals)
                 <x-data-table buttonName="medical record" resource="medical">            
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -25,6 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($medicals->count() > 0)
                                 @foreach($medicals as $medical)
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $medical->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
@@ -70,6 +71,15 @@
 
                                 
                                 @endforeach
+                                @else
+                                    <tr class="font-bold text-3xl block items-center">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            No Medical records Available
+                                        </td>
+                                    </tr>
+                                @endif
                                 
                             </tbody>
                         </table>
@@ -78,6 +88,14 @@
                         {{ $medicals->links() }}
                     </nav>
                 </x-data-table>
+                @else
+                <div class="block p-6 bg-white border border-gray-200 rounded-lg shadow w-full hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        {{ __('No Medical records yet') }}
+                    </h1>
+                    
+                </div>
+                @endif
             </div>
         </section>
     </div>

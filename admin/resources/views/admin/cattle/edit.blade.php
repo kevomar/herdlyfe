@@ -1,4 +1,4 @@
-<x-farmer-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit '.$cattle->cattle_name) }}
@@ -13,19 +13,19 @@
                     @method('PUT')
                     <div class="mb-4">
                         <x-input-label for="cattle_name" :value="__('Cattle Name')" />
-                        <input type="text" name="cattle_name" id="cattle_name" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" value={{ $cattle->cattle_name }} required />
+                        <input type="text" name="cattle_name" id="cattle_name" class="border-gray-300 rounded-md shadow-sm block mt-1 w-full" value={{ $cattle->cattle_name }} required />
                         <x-input-error :messages="$errors->get('cattle_name')" class="mt-2" />
                     </div>
 
                     <div class="mb-4">
                         <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-                        <input type="date" name="date_of_birth" id="date_of_birth" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" value={{ $cattle->date_of_birth }} required />
+                        <input type="date" name="date_of_birth" id="date_of_birth" class="border-gray-300 rounded-md shadow-sm block mt-1 w-full" value={{ $cattle->date_of_birth }} required />
                         <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
                     </div>
 
                     <div class="mb-4">
                         <x-input-label for="breed" :value="__('Breed')" />
-                        <select name="breed" id="breed" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" value={{ $cattle->breed->breed_name }} required>
+                        <select name="breed" id="breed" class="border-gray-300 rounded-md shadow-sm block mt-1 w-full" value={{ $cattle->breed->breed_name }} required>
                             @foreach ($breeds as $breed)
                                 @if($breed->id == $cattle->breed->id)
                                     <option value="{{ $breed->id }}" selected>{{ $breed->breed_name }}</option>
@@ -39,7 +39,7 @@
 
                     <div class="mb-4">
                         <x-input-label for="gender" :value="__('Gender')" />
-                        <select name="gender" id="gender" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" value={{ $cattle->gender }} required>
+                        <select name="gender" id="gender" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" value={{ $cattle->gender }} required>
                             @if($cattle->gender == 'cow')
                                 <option value="cow" selected>cow</option>
                                 <option value="bull">bull</option>
@@ -56,7 +56,7 @@
 
                     <div class="mb-4">
                         <x-input-label for="status" :value="__('Status')" />
-                        <select name="status" id="status" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" value={{ $cattle->status }} required>
+                        <select name="status" id="status" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" value={{ $cattle->status }} required>
                             @if($cattle->gender == 'alive')
                                 <option value="alive" selected>Alive</option>
                                 <option value="dead">Dead</option>
@@ -82,4 +82,4 @@
             </div>
         </div>
     </div>
-</x-farmer-layout>
+</x-app-layout>

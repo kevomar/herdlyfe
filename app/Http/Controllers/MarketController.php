@@ -45,7 +45,7 @@ class MarketController extends Controller
             $amount += $milk->quantity;
         }
 
-        $age = $market->cattle->date_of_birth->diffInMonths(now());
+        $age = $market->cattle->date_of_birth->diffInYears(now());
         return view('market.show', [
             'market' => $market,
             'amount' => $amount,

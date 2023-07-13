@@ -1,9 +1,9 @@
-<x-farmer-layout>
-    <x-slot name="header">
+<x-app-layout>
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Cattle') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-12">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
@@ -26,7 +26,7 @@
 
                         <div class="mb-4">
                             <x-input-label for="breed" :value="__('Breed')" />
-                            <select name="breed" id="breed" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                            <select name="breed" id="breed" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" required>
                                 @foreach($breeds as $breed)
                                     <option value="{{ $breed->id }}">{{ $breed->breed_name }}</option>
                                 @endforeach    
@@ -36,7 +36,7 @@
 
                         {{-- <div class="mb-4">
                             <x-input-label for="herd" :value="__('Herd')" />
-                            <select name="herd" id="herd" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                            <select name="herd" id="herd" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" required>
                                 @foreach($herds as $herd)
                                     <option value="{{ $herd->id }}">{{ $herd->herd_name }}</option>
                                 @endforeach
@@ -46,7 +46,7 @@
 
                         <div class="mb-4">
                             <x-input-label for="gender" :value="__('Gender')" />
-                            <select name="gender" id="gender" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                            <select name="gender" id="gender" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" required>
                                 <option value="bull">Bull</option>
                                 <option value="cow">Cow</option>
                             </select>
@@ -55,17 +55,14 @@
 
                         <div class="mb-4">
                             <x-input-label for="status" :value="__('Status')" />
-                            <select name="status" id="status" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                            <select name="status" id="status" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" required>
                                 <option value="alive">Alive</option>
                                 <option value="dead">Dead</option>
                             </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>
 
-                        
-
                         <div class="flex items-center justify-between mt-4">
-
                             <a href="{{ url()->previous() }}" class="text-indigo-500 hover:text-indigo-700"> Back</a>
                             <x-primary-button class="ml-3">
                                 {{ __('Create') }}
@@ -76,4 +73,4 @@
             </div>
         </div>
     </div>
-</x-farmer-layout>
+</x-app-layout>

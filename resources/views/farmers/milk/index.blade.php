@@ -8,6 +8,7 @@
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
+                @if($milks)
                 <x-data-table buttonName="Milk" resource="milk">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -23,6 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($milks ->count() > 0)
                         @foreach($milks as $milk)
                         <tr class="border-b dark:border-gray-700">
                             <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $milk->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
@@ -60,12 +62,29 @@
                             @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr class="font-bold text-3xl block items-center">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                No Milk records Available
+                            </td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
                     <nav class="p-4 mt-3" aria-label="Table navigation">
                         {{ $milks->links() }}
                     </nav>
                 </x-data-table>
+                @else
+                <div class="block p-6 bg-white border border-gray-200 rounded-lg shadow w-full hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        {{ __('No MIlk records yet') }}
+                    </h1>
+                    
+                </div>
+                @endif
                 
             </div>
             </section>

@@ -1,15 +1,15 @@
-<x-farmer-layout>
+<x-app-layout>
+
+    <!-- Start coding here -->
+    {{-- insert a div to display the number of cattle --}}
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Milk Records') }}
+        <h2 class="font-semibold text-xl text-gray-800  leading-tight">
+            {{ __('Milk records') }}
         </h2>
     </x-slot>
-    <div class="p-4 sm:ml-64">
-        <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-            <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
-                <!-- Start coding here -->
-                <x-data-table buttonName="Milk" resource="milk">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    
+    <x-data-table buttonName="Milk record" resource="milk">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th></th>
                             <th scope="col" class="px-4 py-3">Id</th>
@@ -21,17 +21,16 @@
                                 Actions
                             </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
+                    @if($milks->count() > 0)
                         @foreach($milks as $milk)
-                        <tr class="border-b dark:border-gray-700">
-                            <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $milk->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
-                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $milk->id }} </th>
+                    <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $milk->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500"></td>
+                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{ $milk->id }} </th>
                             <td class="px-4 py-3">{{ $milk->cattle->cattle_name }}</td>
                             <td class="px-4 py-3">{{ $milk->date}}</td>
                             <td class="px-4 py-3">{{ $milk->shift }}</td>
                             <td class="px-4 py-3">{{ $milk->quantity }}</td>
-                            @if ($milk->cattle->herd->user->is(auth()->user()))
                                 <td class="px-4 py-3">
                                     <x-dropdown>
                                         <x-slot name="trigger">
@@ -57,17 +56,28 @@
                                         </x-slot>
                                     </x-dropdown>
                                 </td>
-                            @endif
                         </tr>
                         @endforeach
-                    </tbody>
-                </table>
-                    <nav class="p-4 mt-3" aria-label="Table navigation">
-                        {{ $milks->links() }}
-                    </nav>
-                </x-data-table>
-                
-            </div>
-            </section>
-     </div>
-</x-farmer-layout>
+                        @else
+                        <tr class="font-bold text-3xl block items-center">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                No Milk records Available
+                            </td>
+                        </tr>
+                    @endif
+                   
+                </tbody>
+            </table>
+                <nav class="p-4 mt-10" aria-label="Table navigation">
+                    {{ $milks->links() }}
+                </nav>
+            </x-data-table>
+    </div>
+</div>
+</section>
+</div>
+
+
+</x-app-layout>

@@ -4,6 +4,7 @@
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
                 {{-- insert a div to display the number of cattle --}}
+                @if($cattle)
                 <x-slot name="header">
                     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         {{ __($cattle->cattle_name.'\'s records') }}
@@ -49,13 +50,14 @@
                                         {{ __($children) }}
                                     </p>
                                 </div>
-
+                                @if($cattle->gender == 'cow')
                                 <div class="flex my-2 py-3">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Milk Produced:</h5>
                                     <p class="font-normal text-xl text-gray-700 dark:text-gray-400 ml-4 pt-1">
                                     {{  __($amount)
                                     }}</p>
                                 </div>
+                                @endif
 
 
 
@@ -215,6 +217,14 @@
 
                     </div>
                 </div>
+                @else
+                <div class="flex justify-center">
+                    <div class="block p-6 bg-white border border-gray-200 rounded-lg shadow w-full hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                            {{ __('No cattle records yet') }}
+                        </h1>
+                    </div>
+                @endif
             </div>
             </section>
      </div>

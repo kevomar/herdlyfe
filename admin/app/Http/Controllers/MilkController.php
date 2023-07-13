@@ -14,8 +14,8 @@ class MilkController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $herdId = $user->herd->id;
+        // $user = Auth::user();
+        // $herdId = $user->herd->id;
         //get the milk records whose cattle belong to the owner
         $milk = Milk::paginate(10);
         // $milk = Milk::where(
@@ -57,7 +57,7 @@ class MilkController extends Controller
      */
     public function create()
     {
-        $cattles = Cattle::where('herd_id', auth()->user()->herd->id)->get();
+        $cattles = Cattle::where('gender', 'cow')->get();
         return view(
             'admin.milk.create',
             [
@@ -104,10 +104,9 @@ class MilkController extends Controller
      */
     public function edit(Milk $milk)
     {
-        $cattles = Cattle::where('herd_id', auth()->user()->herd->id)->get();
         return view('admin.milk.edit', [
             'milk' => $milk,
-            'cattles' => $cattles,
+            'cattles' => Cattle::all(),
         ]);
     }
 
@@ -116,7 +115,6 @@ class MilkController extends Controller
      */
     public function update(Request $request, Milk $milk)
     {
-        $this->authorize('update', $milk);
         $validated = $request->validate([
             'cattle_id' => 'required',
             'date' => 'required',
@@ -135,7 +133,6 @@ class MilkController extends Controller
      */
     public function destroy(Milk $milk)
     {
-        $this->authorize('delete', $milk);
         $milk->delete();
 
         return to_route('milk.index')

@@ -12,6 +12,11 @@ class Herd extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'herd_id',
+        'herd_name'
+    ];
+
     public function user(): BelongsTo
     {
         //herd belongs to one user

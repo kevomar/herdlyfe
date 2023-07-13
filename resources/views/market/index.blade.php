@@ -113,6 +113,7 @@
 
 
             <div class="row gx-4 gy-3">
+                @if($markets->count() > 0)
                 @foreach($markets as $market)
                 <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="product-item">
@@ -147,6 +148,11 @@
 
                 </div>
                 @endforeach
+                @else
+                <h1 class="text-3xl text-center font-bold">
+                    No cattle Available for sale right now
+                </h1>
+                @endif
                 
         </div>
 

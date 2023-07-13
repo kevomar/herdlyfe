@@ -1,4 +1,4 @@
-<x-farmer-layout>
+<x-app-layout>
     <div class="py-12">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -8,10 +8,9 @@
                         @method('POST')
                         <div class="mb-4">
                             <x-input-label for="cattle_id" :value="__('Cattle')" />
-                            <select name="cattle_id" id="cattle_id" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <select name="cattle_id" id="cattle_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
                                 @foreach ($cattles as $cattle)
                                     <option value="{{ $cattle->id }}">{{ $cattle->cattle_name }}</option>
-                                    
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('cattle_id')" class="mt-2" />
@@ -34,14 +33,13 @@
                         </div>
                         <div class="mb-4">
                             <x-input-label for="shift" :value="__('Time')" />
-                            <select name="shift" id="shift" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <select name="shift" id="shift" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
                                 <option value="morning">Morning</option>
                                 <option value="afternoon">Afternoon</option>
                                 <option value="evening">Evening</option>
                             </select>
                             <x-input-error :messages="$errors->get('shift')" class="mt-2" />
                         </div>
-
 
                         <div class="flex items-center justify-between mt-4">
                             <a href="{{ url()->previous() }}" class="text-indigo-500 hover:text-indigo-700"> Back</a>
@@ -54,4 +52,4 @@
             </div>
         </div>
     </div>
-</x-farmer-layout>
+</x-app-layout>
