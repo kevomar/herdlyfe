@@ -6,6 +6,7 @@ use App\Models\Breed;
 use App\Models\Cattle;
 use App\Models\Herd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CattleController extends Controller
 {
@@ -14,6 +15,22 @@ class CattleController extends Controller
      */
     public function index()
     {
+
+
+        if (!auth()->user()->herd) {
+            Herd::create([
+                'user_id' => Str::uuid(),
+                'herd_name' => fake()->word()
+            ]);
+            return view('farmers.cattle.index', [
+                'cattle' => null,
+                'amount' => 0,
+                'children' => 0,
+                'milks' => null,
+                'medicals' => null,
+                'breedings' => null,
+            ]);
+        }
 
         $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
         $maleCount = $cattle->where('gender', 'bull')->count();
@@ -86,6 +103,16 @@ class CattleController extends Controller
      */
     public function show(Cattle $cattle)
     {
+        if (!auth()->user()->herd) {
+            return view('farmers.cattle.index', [
+                'cattle' => null,
+                'amount' => 0,
+                'children' => 0,
+                'milks' => null,
+                'medicals' => null,
+                'breedings' => null,
+            ]);
+        }
         $amount = 0;
         $children = 0;
         foreach ($cattle->milk as $milk) {

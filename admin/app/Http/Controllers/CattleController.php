@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Breed;
 use App\Models\Cattle;
 use App\Models\Herd;
+use App\Models\Milk;
 use Illuminate\Http\Request;
 
 class CattleController extends Controller
@@ -91,6 +92,8 @@ class CattleController extends Controller
             $amount += $milk->quantity;
         }
 
+
+
         if ($cattle->gender == 'cow') {
             $children = $cattle->breeding->count();
         } else {
@@ -106,9 +109,9 @@ class CattleController extends Controller
             'cattle' => $cattle,
             'amount' => $amount,
             'children' => $children,
-            'milks' => $cattle->milk,
+            'milks' => Milk::where('cattle_id', $cattle->id)->paginate(),
             'medicals' => $cattle->health,
-            'breedings' => $breeding,
+            // 'breedings' => $breeding,
         ]);
     }
 
@@ -128,7 +131,6 @@ class CattleController extends Controller
      */
     public function update(Request $request, Cattle $cattle)
     {
-        $this->authorize('update', $cattle);
         $validatedData = $request->validate([
             'cattle_name' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
@@ -148,7 +150,6 @@ class CattleController extends Controller
      */
     public function destroy(Cattle $cattle)
     {
-        $this->authorize('delete', $cattle);
         $cattle->delete();
 
         return to_route('cattle.index')

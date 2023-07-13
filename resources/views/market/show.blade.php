@@ -14,20 +14,25 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">   
 
+    <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <!-- Template Stylesheet -->
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="css/viewproduct.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="../../css/style.css"" rel="stylesheet">
+    <link href="../../css/viewproduct.css"  rel="stylesheet">
+
+    <!--link href="css/viewproduct.css" rel="stylesheet"-->
 </head>
 
 <body>
@@ -66,17 +71,25 @@
     <div class="container">
         <div class="product-container">
             <div class="prod-img">
-                <img src="img/cow8.jpg" alt="Cow 8">
+                <img src="https://placehold.co/400" alt="Cow 8">
             </div>
             @php
                 $cattle = $market->cattle;
             @endphp
             <div class="prod-details">
-                <p><span>Name:</span> {{ $cattle->name }}</p>
-                <p><span>Age:</span> {{ $cattle->age }}</p>
+                <p><span>Name:</span> {{ $cattle->cattle_name }}</p>
+                <p><span>Age:</span> {{ $age }}</p>
                 <p><span>Gender:</span> {{ $cattle->gender }}</p>
-                <p><span>Breed:</span> {{ $age }}</p>
+                <p><span>Breed:</span> {{ $cattle->breed->breed_name }}</p>
+                @if($cattle->gender == 'cow')
                 <p><span>Milk Produced:</span> {{ $amount }}</p>
+                @endif
+                @php
+                    $price = (float)$market->price;
+                    $formattedPrice = number_format($price, 2, '.', ',');
+                @endphp
+                <p><span>Price:</span> {{ 'ksh. '.$formattedPrice }}</p>
+                
             </div>
         </div>
 

@@ -17,11 +17,11 @@ class HealthController extends Controller
     public function index()
     {
         //get the particular cattle's health records that belong to the authenticated user
-        $user = Auth::user();
-        //get the users herd
-        $herd = $user->herd;
-        //get the cattle in the herd
-        $cattle = $herd->cattle;
+        // $user = Auth::user();
+        // //get the users herd
+        // $herd = $user->herd;
+        // //get the cattle in the herd
+        // $cattle = $herd->cattle;
         //get the medical recors whose cattle id are in the collected cattle data
         $medicals = Health::paginate(10);
 
@@ -54,7 +54,7 @@ class HealthController extends Controller
      */
     public function create()
     {
-        $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
+        $cattle = Cattle::all();
         return view('admin.medical.create', [
             'cattles' => $cattle,
         ]);
@@ -100,7 +100,7 @@ class HealthController extends Controller
      */
     public function edit(Health $medical)
     {
-        $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
+        $cattle = Cattle::all();
         return view('admin.medical.edit', [
             'medical' => $medical,
             'cattles' => $cattle
@@ -112,7 +112,6 @@ class HealthController extends Controller
      */
     public function update(Request $request, Health $medical)
     {
-        $this->authorize('update', $medical);
 
         $validated = $request->validate([
             'cattle_id' => 'required',
@@ -135,7 +134,7 @@ class HealthController extends Controller
     {
         // echo $medical;
         // dd($medical);
-        $this->authorize('delete', $medical);
+
         $medical->delete();
 
         return to_route('medical.index')

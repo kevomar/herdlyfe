@@ -102,6 +102,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($feeds->count() > 0)
                                 @foreach($feeds as $feed)
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-3"><input id="check" type="checkbox" value="{{ $feed->id }}" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></td>
@@ -140,7 +141,16 @@
                                     @endif
                                 </tr>
                                 @endforeach
-                               
+                                @else
+                                    <tr class="font-bold text-3xl block items-center">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            No Feeds Available
+                                        </td>
+                                    </tr>
+                                @endif
+                                        
                             </tbody>
                         </table>
                     </div>

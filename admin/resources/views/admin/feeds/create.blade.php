@@ -1,4 +1,4 @@
-<x-farmer-layout>
+<x-app-layout>
     {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Cattle') }}
@@ -47,4 +47,4 @@
             </div>
         </div>
     </div>
-</x-farmer-layout>
+</x-app-layout>

@@ -18,7 +18,7 @@ class HerdFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::all()->random()->id,
+            'user_id' => 1,
             'herd_name' => $this->faker->word(),
         ];
     }

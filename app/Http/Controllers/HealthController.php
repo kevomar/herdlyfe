@@ -20,6 +20,12 @@ class HealthController extends Controller
         $user = Auth::user();
         //get the users herd
         $herd = $user->herd;
+        //confirm the herd has cattle
+        if (!$herd) {
+            return view('farmers.medical.index', [
+                'medicals' => null,
+            ]);
+        }
         //get the cattle in the herd
         $cattle = $herd->cattle;
         //get the medical recors whose cattle id are in the collected cattle data

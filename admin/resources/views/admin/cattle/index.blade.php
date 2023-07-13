@@ -72,7 +72,7 @@
                                             </x-slot>
                                             <x-slot name="content">
                                                 <x-dropdown-link :href="route('cattle.show', $cattle)">
-                                                    {{ __('Show '.$cattle->id) }}
+                                                    {{ __('Show ') }}
                                                 </x-dropdown-link>
                                                 <x-dropdown-link :href="route('cattle.edit', $cattle)">
                                                     {{ __('Edit') }}  
@@ -98,7 +98,7 @@
                             </tbody>
                         </table>
                             <nav class="p-4 mt-10" aria-label="Table navigation">
-                                {{ $cattles->links('vendor.pagination.simple-bootstrap-4') }}
+                                {{ $cattles->links() }}
                             </nav>
                         </x-data-table>
                 </div>

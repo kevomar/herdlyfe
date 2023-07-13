@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\CattleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\MilkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +36,8 @@ Route::resource('medical', HealthController::class)
 Route::resource('feeds', FeedController::class)
     ->middleware(['auth', 'verified', 'admin']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    ->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::view('about', 'about')->name('about');
