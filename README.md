@@ -18,7 +18,7 @@ Herdlyfe is a powerful web-based application designed for Kenyan dairy farmers. 
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/FurryFriends.git`
+1. Clone the repository: `git clone (https://github.com/kevomar/herdlyfe.git)`
 2. Install the project dependencies: `composer install`
 3. Create a copy of the `.env.example` file and rename it to `.env`.
 4. Generate an application key: `php artisan key:generate`
