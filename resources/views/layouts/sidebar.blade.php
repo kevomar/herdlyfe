@@ -28,7 +28,7 @@
                 <x-nav-link :href="route('cattle.index')" :active="request()->routeIs(['cattle.index','cattle.create','cattle.edit','cattle.show'])">
                   {{ __('My Cattle') }}
                   </x-nav-link>
-                <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
+
                </div>
           </li>
 

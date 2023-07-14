@@ -21,8 +21,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('home');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -43,7 +51,7 @@ Route::resource('feeds', FeedController::class)
 Route::resource('market', MarketController::class)
     ->middleware(['auth', 'verified']);
 
-// Route::resource('breeding', BreedingController::class)
+// Route::resource('breeding', BreedingControPauthller::class)
 //     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

@@ -17,28 +17,51 @@ class DashboardController extends Controller
         $cattles = Cattle::all();
         $milks = Milk::all();
         $markets = Market::all();
+        $year = date('Y');
+        $startDate = Carbon::now()->startOfWeek(); // Start of current week
+        $endDate = Carbon::now()->endOfWeek(); // End of current week
 
-        $milkData = Milk::whereYear('created_at', '=', 2023)
+        $yearlyMilkData = Milk::whereYear('date', '=', $year)
+            ->orderByRaw("MONTH(date)")
             ->orderBy('created_at')
             ->get()
             ->groupBy(function ($d) {
-                return Carbon::parse($d->created_at)->format('M');
+                return Carbon::parse($d->date)->format('M');
+            });
+
+        $weeklyMilkData = Milk::whereBetween('date', [$startDate, $endDate])
+            ->orderBy('date')
+            ->get()
+            ->groupBy(function ($d) {
+                return Carbon::parse($d->date)->format('M');
             });
 
         $months = [];
         $milkCount = [];
+        $thisWeek = [];
+        $thisWeeksCount = [];
 
-        foreach ($milkData as $key => $values) {
+
+        foreach ($yearlyMilkData as $key => $values) {
             $months[] = $key;
             $milkCount[] = $values->sum('quantity');
         }
 
-        dd($months);
+        foreach ($weeklyMilkData as $key => $values) {
+            $thisWeek[] = $key;
+            $thisWeeksCount[] = $values->sum('quantity');
+        }
+
+
         return view('dashboard', [
             'users' => $users,
             'cattles' => $cattles,
             'milks' => $milks,
             'markets' => $markets,
+            'months' => $months,
+            'milkCount' => $milkCount,
+            'week' => $thisWeek,
+            'weekCount' => $thisWeeksCount,
         ]);
     }
 }

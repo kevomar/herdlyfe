@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Herdlyfe</title>
+    <title>Herdlyfe Contact Page</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -40,8 +40,8 @@
     <!-- Spinner End -->
 
 
-    <!-- Topbar Start -->
-    <!--div class="container-fluid bg-dark px-0">
+    <!-- Topbar Start >
+    <div class="container-fluid bg-dark px-0">
         <div class="row g-0 d-none d-lg-flex">
             <div class="col-lg-6 ps-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center text-light">
@@ -59,8 +59,8 @@
                 </div>
             </div>
         </div>
-    </div-->
-    <!-- Topbar End -->
+    </div>
+    < Topbar End -->
 
 
     <!-- Navbar Start -->
@@ -104,12 +104,12 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container text-center py-5">
-            <h1 class="display-3 text-white mb-4 animated slideInDown">Cattle</h1>
+            <h1 class="display-3 text-white mb-4 animated slideInDown">Contact us</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cattle</li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
             </nav>
         </div>
@@ -117,116 +117,88 @@
     <!-- Page Header End -->
 
 
-    <!-- Product Start -->
+    <!-- Contact Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">Our Products</p>
-                <h1 class="mb-5">Where Cattle Trading Flourishes: Unleash the Power of the Herdlyf Marketplace.</h1>
+                <p class="section-title bg-white text-center text-primary px-3">Contact Us</p>
+                <h1 class="mb-5">If You Have Any Query, Please Contact Us</h1>
             </div>
-
-
-            <div class="row gx-4 gy-3">
-                @if($markets->count() > 0)
-                @foreach($markets as $market)
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="product-item">
-                        <div class="position-relative">
-                            <img class="img-fluid" src="https://placehold.co/300" alt="">
-                            {{-- <div class="product-overlay">
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                            </div> --}}
-                        </div>
-                        
-                        <div class="text-center p-4">
-                            <a class="d-block h4" href="">{{ $market->cattle->cattle_name }}</a>
-                            @php
-                                $price = (float)$market->price;
-                                $formattedPrice = number_format($market->price, 2, '.', ',');
-                                $cattle = $market->cattle;
-                            @endphp
-                            <a class="d-block h5" href="">{{ 'Ksh '.$formattedPrice }}</a>
-                            <a href="{{ route('market.show', $market) }}">
-                                <button type="button" class="btn btn-primary btn-sm px-3 py-2 mt-3 mx-3">
-                                    View More
-                                </button>
-                            </a>
-                            <a>
-                                <button type="button" class="btn btn-primary btn-sm px-3 py-2 mt-3">
-                                    Buy now
-                                </button>
-                            </a>
-                            
-                        </div>
-                    </div>
-
-                </div>
-                @endforeach
-                @else
-                <h1 class="text-3xl text-center font-bold">
-                    No cattle Available for sale right now
-                </h1>
-                @endif
-                
-        </div>
-
-
-    </div>
-    <!-- Product End -->
-
-
-    <!-- Features Start -->
-    <!--div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
+            <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="section-title bg-white text-start text-primary pe-3">Why Us!</p>
-                    <h1 class="mb-4">Few Reasons Why People Choosing Us!</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Justo magna erat amet</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Clita erat ipsum et lorem et sit</p>
-                    <a class="btn btn-secondary rounded-pill py-3 px-5 mt-3" href="">Explore More</a>
-                </div>
-                <div class="col-lg-6">
-                    <div class="rounded overflow-hidden">
-                        <div class="row g-0">
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="text-center bg-primary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/experience.png" alt="">
-                                    <h1 class="display-6 text-white" data-toggle="counter-up">25</h1>
-                                    <span class="fs-5 fw-semi-bold text-secondary">Years Experience</span>
+                    <h3 class="mb-4">We value your feedback and are here to assist you.</h3>
+                    <p class="mb-4">Contact Us today and let us help you navigate your dairy farming journey with Herdlyfe.</p>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="text-center bg-secondary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/award.png" alt="">
-                                    <h1 class="display-6" data-toggle="counter-up">183</h1>
-                                    <span class="fs-5 fw-semi-bold text-primary">Award Winning</span>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="text-center bg-secondary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/animal.png" alt="">
-                                    <h1 class="display-6" data-toggle="counter-up">2619</h1>
-                                    <span class="fs-5 fw-semi-bold text-primary">Total Animals</span>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
-                                <div class="text-center bg-primary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/client.png" alt="">
-                                    <h1 class="display-6 text-white" data-toggle="counter-up">51940</h1>
-                                    <span class="fs-5 fw-semi-bold text-secondary">Happy Clients</span>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 250px"></textarea>
+                                    <label for="message">Message</label>
                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-secondary rounded-pill py-3 px-5" type="submit">Send Message</button>
                             </div>
                         </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <h3 class="mb-4">Contact Details</h3>
+                    <div class="d-flex border-bottom pb-3 mb-3">
+                        <div class="flex-shrink-0 btn-square bg-secondary rounded-circle">
+                            <i class="fa fa-map-marker-alt text-body"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6>Our Office</h6>
+                            <span>40100, Nairobi Kenya</span>
+                        </div>
                     </div>
+                    <div class="d-flex border-bottom pb-3 mb-3">
+                        <div class="flex-shrink-0 btn-square bg-secondary rounded-circle">
+                            <i class="fa fa-phone-alt text-body"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6>Call Us</h6>
+                            <span>+254 796 657 810</span>
+                        </div>
+                    </div>
+                    <div class="d-flex border-bottom-0 pb-3 mb-3">
+                        <div class="flex-shrink-0 btn-square bg-secondary rounded-circle">
+                            <i class="fa fa-envelope text-body"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6>Mail Us</h6>
+                            <span>herdlyfe@gmail.com</span>
+                        </div>
+                    </div>
+
+                    <!--iframe class="w-100 rounded"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                    frameborder="0" style="min-height: 300px; border:0;" allowfullscreen="" aria-hidden="false"
+                    tabindex="0"></iframe-->
                 </div>
             </div>
         </div>
-    </div-->
-    <!-- Features End -->
+    </div>
+    <!-- Contact End -->
 
 
     <!-- Footer Start -->
@@ -235,8 +207,8 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Our Office</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>40100, Nairobi Kenya</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+254 796 657 810</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>Herdlyfe@gmail.com</p>
                     <div class="d-flex pt-3">
                         <a class="btn btn-square btn-secondary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
@@ -276,15 +248,14 @@
     <!-- Footer End -->
 
 
-    <!-- Copyright Start -->
-    <div class="container-fluid bg-secondary text-body copyright py-4">
+     <!-- Copyright Start -->
+     <div class="container-fluid bg-secondary text-body copyright py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                     &copy; <a class="fw-semi-bold" href="#">Herdlyfe</a>, All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                     Explore, Connect, and Trade in the Herdlyf Marketplace.
                 </div>
             </div>

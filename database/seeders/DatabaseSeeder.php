@@ -22,15 +22,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(3)->create();
+        User::factory(4)->create();
         $this->call([HerdSeeder::class]);
         Breed::factory(3)->create();
-        Cattle::factory(20)->create();
-        Milk::factory(100)->create();
-        Health::factory(100)->create();
+        Cattle::factory(900)->create();
+        Milk::factory(2000)->create();
+        Health::factory(1000)->create();
         Breeding::factory(100)->create();
-        Feed::factory(100)->create();
-        Market::factory(20)->create();
+        Feed::factory(10000)->create();
+        Market::factory(100)->create();
 
         User::create([
             'first_name' => 'Admin',
