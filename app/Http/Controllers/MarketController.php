@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cattle;
+use App\Models\Health;
 use App\Models\Market;
+use App\Models\Milk;
 use Illuminate\Http\Request;
 
 class MarketController extends Controller
@@ -45,11 +47,20 @@ class MarketController extends Controller
             $amount += $milk->quantity;
         }
 
+        $milks = Milk::where('cattle_id', $market->cattle->id)
+            ->paginate(10);
+        $medicals = Health::where('cattle_id', $market->cattle->id)
+            ->paginate(10);
+
         $age = $market->cattle->date_of_birth->diffInYears(now());
+
+        $cattle = Cattle::where('id', $market->cattle->id)->get();
         return view('market.show', [
-            'market' => $market,
+            'cattle' => $cattle[0],
             'amount' => $amount,
             'age' => $age,
+            'milks' => $milks,
+            'medicals' => $medicals,
         ]);
     }
 

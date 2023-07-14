@@ -74,7 +74,7 @@
                                             </x-slot>
                                             <x-slot name="content">
                                                 <x-dropdown-link :href="route('cattle.show', $cattle)">
-                                                    {{ __('Show '.$cattle->id) }}
+                                                    {{ __('Show ') }}
                                                 </x-dropdown-link>
                                                 <x-dropdown-link :href="route('cattle.edit', $cattle)">
                                                     {{ __('Edit') }}  

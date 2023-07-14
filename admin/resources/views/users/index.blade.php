@@ -41,17 +41,17 @@
                                         </x-slot>
                                         <x-slot name="content">
                                             
-                                            <x-dropdown-link :href="route('milk.edit', $user)">
+                                            <x-dropdown-link :href="route('user.edit', $user)">
                                                 {{ __('Edit') }}  
                                             </x-dropdown-link>
                                             
-                                            <form method="POST" action="{{ route('milk.destroy', $user) }}">
+                                            {{-- <form method="POST" action="{{ route('user.destroy', $user) }}">
                                                 @csrf
                                                 @method('delete')
-                                                <x-dropdown-link :href="route('milk.destroy', $user)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
+                                                <x-dropdown-link :href="route('user.destroy', $user)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
                                                     {{ __('Delete') }}
                                                 </x-dropdown-link>
-                                            </form>
+                                            </form> --}}
                                         </x-slot>
                                     </x-dropdown>
                                 </td>

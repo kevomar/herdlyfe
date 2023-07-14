@@ -17,9 +17,13 @@ class MilkFactory extends Factory
      */
     public function definition(): array
     {
+        //get the start of this year
+        $startDate = date('Y-01-01');
+        //get todays date
+        $endDate = date('Y-m-d');
         return [
             'cattle_id' => Cattle::all()->where('gender', '=', 'cow')->random()->id,
-            'date' => $this->faker->date(),
+            'date' => $this->faker->dateTimeBetween($startDate, $endDate),
             'shift' => $this->faker->randomElement([
                 'morning', 'afternoon', 'evening',
             ]),

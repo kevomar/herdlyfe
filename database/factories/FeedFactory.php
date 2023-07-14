@@ -20,9 +20,9 @@ class FeedFactory extends Factory
         return [
             'herd_id' => Herd::all()->random()->id,
             'feed_name' => $this->faker->word(),
-            'quantity' => $quantity = $this->faker->randomNumber(),
+            'quantity' => $quantity = $this->faker->randomNumber(3),
             'purchase_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'unit_price' => $unit_price = $this->faker->randomNumber(),
+            'unit_price' => $unit_price = $this->faker->randomNumber(3),
             'total_price' => $quantity * $unit_price,
         ];
     }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Breed;
 use App\Models\Cattle;
+use App\Models\Health;
 use App\Models\Herd;
+use App\Models\Milk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -130,12 +132,19 @@ class CattleController extends Controller
         } else {
             $breeding = $cattle->sire;
         }
+
+        $milks = Milk::where('cattle_id', $cattle->id)
+            ->paginate(10);
+        $medicals = Health::where('cattle_id', $cattle->id)
+            ->paginate(10);
+
+
         return view('farmers.cattle.show', [
             'cattle' => $cattle,
             'amount' => $amount,
             'children' => $children,
-            'milks' => $cattle->milk,
-            'medicals' => $cattle->health,
+            'milks' => $milks,
+            'medicals' => $medicals,
             'breedings' => $breeding,
         ]);
     }

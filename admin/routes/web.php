@@ -40,7 +40,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])
     ->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::view('about', 'about')->name('about');
+    //     Route::view('about', 'about')->name('about');
 
     Route::resource('user', UserController::class);
 

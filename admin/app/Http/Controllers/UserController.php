@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -48,15 +49,29 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('users.edit', [
+            'user' => User::findOrFail($id),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'date'],
+            'gender' => ['required', 'string'],
+            'email' => ['email', 'max:255'],
+        ]);
+
+        $user->update($validated);
+
+        return to_route('user.index')
+            ->with('success', 'User updated successfully');
     }
 
     /**
