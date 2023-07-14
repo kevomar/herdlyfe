@@ -39,7 +39,7 @@
     </div>
     <!-- Spinner End -->
 
-
+{{-- 
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark px-0">
         <div class="row g-0 d-none d-lg-flex">
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
+    <!-- Topbar End --> --}}
 
 
     <!-- Navbar Start -->
@@ -76,6 +76,7 @@
                 @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
+                    <a href="{{ route('home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-3">Home</a>
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-3">Dashboard</a>
                         <a href="{{ url('market') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-3">Marketplace</a>
                         <a href="{{ url('about') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-50 mx-30">About us</a>
