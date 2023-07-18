@@ -30,6 +30,7 @@ class HealthController extends Controller
         $cattle = $herd->cattle;
         //get the medical recors whose cattle id are in the collected cattle data
         $medicals = Health::whereIn('cattle_id', $cattle->pluck('id'))
+            ->latest('date')
             ->paginate(10);
 
         if (request('search')) {
@@ -147,5 +148,13 @@ class HealthController extends Controller
 
         return to_route('medical.index')
             ->with('success', 'health record deleted successfully');
+    }
+
+    public function createSpecific($id)
+    {
+        $cattle = Cattle::where('id', $id)->get();
+        return view('farmers.medical.create-specific', [
+            'cattle' => $cattle[0],
+        ]);
     }
 }

@@ -113,7 +113,7 @@
                                     <td class="px-4 py-3">{{ $feed->purchase_date }}</td>
                                     <td class="px-4 py-3">{{ $feed->unit_price }}</td>
                                     <td class="px-4 py-3">{{ $feed->total_price }}</td>
-                                   
+
                                     @if($feed->herd->user->is(Auth::user()))
                                         <td class="px-4 py-3 flex items-center">
                                             <x-dropdown class="relative z-50">
@@ -126,15 +126,15 @@
                                                 </x-slot>
                                                 <x-slot name="content">
                                                     <x-dropdown-link :href="route('feeds.edit', $feed)">
-                                                        {{ __('Edit') }}  
+                                                        {{ __('Edit') }}
                                                     </x-dropdown-link>
-                                                        <form method="POST" action="{{ route('feeds.destroy', $feed) }}">
+                                                        {{-- <form method="POST" action="{{ route('feeds.destroy', $feed) }}">
                                                             @csrf
                                                             @method('delete')
                                                             <x-dropdown-link :href="route('feeds.destroy', $feed)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
                                                                 {{ __('Delete') }}
                                                             </x-dropdown-link>
-                                                        </form>
+                                                        </form> --}}
                                                 </x-slot>
                                             </x-dropdown>
                                         </td>
@@ -150,7 +150,7 @@
                                         </td>
                                     </tr>
                                 @endif
-                                        
+
                             </tbody>
                         </table>
                     </div>

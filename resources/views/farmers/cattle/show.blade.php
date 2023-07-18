@@ -5,13 +5,15 @@
                 <!-- Start coding here -->
                 {{-- insert a div to display the number of cattle --}}
                 <x-slot name="header">
+                    <a href="{{ url()->previous() }}" class="float-left mr-5 text-indigo-500 hover:text-indigo-700">back</a>
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __($cattle->cattle_name.'\'s records') }}
                     </h2>
                 </x-slot>
                 <div class="grid grid-cols-3 overflow-auto gap-4">
                     <div class="col-span-1 row-span-1">
-                        <img src="https://placehold.co/400x400.png" alt="{{ $cattle->cattle_name.' image' }}">
+                        {{-- https://placehold.co/400x400.png --}}
+                        <img src="{{ $cattle->image ? asset('storage/'.$cattle->image) : 'https://placehold.co/400x400.png' }}" alt="{{ $cattle->cattle_name.' image' }}">
                     </div>
                     <div class="col-span-2 row-span-1 gap-4 ml-2">
                         <div class="block p-6 bg-white border border-gray-200 rounded-lg shadow w-full hover:bg-gray-100">
@@ -47,7 +49,7 @@
                         </div>
                     </div>
 
-                    
+
 
                 </div>
 
@@ -68,6 +70,7 @@
                                 <th scope="col" class="px-4 py-3">Date</th>
                                 <th scope="col" class="px-4 py-3">Shift</th>
                                 <th scope="col" class="px-4 py-3">Quantity</th>
+                                <th scope="col" class="px-4 py-3">Quantity</th>
                             </tr>
                         </thead>
                         <tbody class="min-h-full">
@@ -81,9 +84,34 @@
                                     <td class="px-4 py-3">{{ $milk->date}}</td>
                                     <td class="px-4 py-3">{{ $milk->shift }}</td>
                                     <td class="px-4 py-3">{{ $milk->quantity }}</td>
+                                    <td class="px-4 py-3">
+                                        <x-dropdown>
+                                            <x-slot name="trigger">
+                                                <button>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 text-center" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                    </svg>
+                                                </button>
+                                            </x-slot>
+                                            <x-slot name="content">
+
+                                                <x-dropdown-link :href="route('milk.edit', $milk)">
+                                                    {{ __('Edit') }}
+                                                </x-dropdown-link>
+
+                                                {{-- <form method="POST" action="{{ route('milk.destroy', $milk) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <x-dropdown-link :href="route('milk.destroy', $milk)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
+                                                        {{ __('Delete') }}
+                                                    </x-dropdown-link>
+                                                </form> --}}
+                                            </x-slot>
+                                        </x-dropdown>
+                                    </td>
                                 </tr>
                                 @endforeach
-                                
+
                             @else
                                 <tr>
                                     <td colspan="6" class="text-center py-4">
@@ -93,16 +121,16 @@
                                     </td>
                                 </tr>
                             @endif
-                            
+
                         </tbody>
                     </table>
                     <nav class="mt-3 p-4">
                         {{ $milks->links() }}
-                    </nav> 
-                        
-                        
-                    </x-data-table> 
-                                             
+                    </nav>
+
+
+                    </x-data-table>
+
                     @endif
 
                 </div>
@@ -149,14 +177,14 @@
                                     </td>
                                 </tr>
                             @endif
-                            
+
                         </tbody>
                     </table>
                     <nav class="mt-3 p-4">
                         {{ $medicals->links() }}
                     </nav>
-                        
-                    </x-data-table>                            
+
+                    </x-data-table>
                     @endif
 
                 </div>

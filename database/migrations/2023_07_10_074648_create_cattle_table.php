@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cattle', function (Blueprint $table) {
             $table->id();
             $table->foreignId('herd_id')->constrained()->cascadeOnDelete();
+            $table->string('image')->nullable();
             $table->foreignId('breed_id')->constrained()->cascadeOnDelete();
             $table->string('cattle_name');
             $table->date('date_of_birth');

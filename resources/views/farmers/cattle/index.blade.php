@@ -17,8 +17,8 @@
                         <p class="font-normal text-gray-700 dark:text-gray-400 text-center">{{ $cattles->total() }}</p>
                     </div>
                     <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Males: </h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400 text-center">{{ $maleCount }}</p>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Female Cows: </h5>
+                        <p class="font-normal text-gray-700 dark:text-gray-400 text-center">{{ $femaleCount }}</p>
                     </div>
                     <div class="mb-3 w-1/3 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Average age:</h5>
@@ -26,7 +26,7 @@
                     </div>
 
                 </div>
-                
+
                 <x-data-table buttonName="Cattle" resource="cattle">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -59,7 +59,7 @@
                                     <td class="px-4 py-3">{{ $age }}</td>
                                     <td class="px-4 py-3">{{ $cattle->gender }}</td>
                                     <td class="px-4 py-3">
-                                        <span class="px-2 py-1 font-semibold leading-tight {{ $cattle->status == 'alive' ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100' }} rounded-full dark:bg-green-700 dark:text-green-100 dark:bg-opacity-25">
+                                        <span class="px-2 py-1 font-semibold leading-tight {{ $cattle->status == 'not for sale' ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100' }} rounded-full dark:bg-green-700 dark:text-green-100 dark:bg-opacity-25">
                                             {{ $cattle->status }}
                                         </span>
                                     </td>
@@ -77,7 +77,20 @@
                                                     {{ __('Show ') }}
                                                 </x-dropdown-link>
                                                 <x-dropdown-link :href="route('cattle.edit', $cattle)">
-                                                    {{ __('Edit') }}  
+                                                    {{ __('Edit') }}
+                                                </x-dropdown-link>
+
+                                                <x-dropdown-link :href="route('milk.createSpecific', $cattle->id)">
+                                                    {{ __('Add Milk Record') }}
+                                                </x-dropdown-link>
+                                                <x-dropdown-link :href="route('health.createSpecific', $cattle->id)">
+                                                    {{ __('Add Health Record') }}
+                                                </x-dropdown-link>
+                                                <x-dropdown-link :href="route('market.forsale', $cattle->id)">
+                                                    {{ __('Sell') }}
+                                                </x-dropdown-link>
+                                                <x-dropdown-link :href="route('market.remove', $cattle->id)">
+                                                    {{ __('Remove from market') }}
                                                 </x-dropdown-link>
 
                                                 <form method="POST" action="{{ route('cattle.destroy', $cattle) }}">
@@ -92,10 +105,10 @@
 
                                     </td>
                                 </tr>
-                               
 
-                                
-                                
+
+
+
                                 @endforeach
                                 @else
                                 <tr class="font-bold text-3xl block items-center">
@@ -104,16 +117,16 @@
                                     </td>
                                 </tr>
                                 @endif
-                               
+
                             </tbody>
                         </table>
-                                
+
                             <nav class="p-4 mt-10" aria-label="Table navigation">
                                 {{ $cattles->links() }}
                             </nav>
-                            
+
                         </x-data-table>
-                        
+
                 </div>
                 @else
                 <div class="flex justify-center">
@@ -128,6 +141,6 @@
             </div>
             </section>
      </div>
-    
+
 
 </x-farmer-layout>

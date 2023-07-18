@@ -41,13 +41,13 @@
                             <div class="flex my-2 py-1">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Milk Produced:</h5>
                                 <p class="font-normal text-xl text-gray-700 ml-4 pt-1">
-                                    {{  __($amount) }}
+                                    {{  __($amount.' L') }}
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    
+
 
                 </div>
 
@@ -83,7 +83,7 @@
                                     <td class="px-4 py-3">{{ $milk->quantity }}</td>
                                 </tr>
                                 @endforeach
-                                
+
                             @else
                                 <tr>
                                     <td colspan="6" class="text-center py-4">
@@ -93,16 +93,16 @@
                                     </td>
                                 </tr>
                             @endif
-                            
+
                         </tbody>
                     </table>
                     <nav>
                         {{ $milks->links() }}
-                    </nav> 
-                        
-                        
-                    </x-data-table> 
-                                             
+                    </nav>
+
+
+                    </x-data-table>
+
                     @endif
 
                 </div>
@@ -149,10 +149,10 @@
                                     </td>
                                 </tr>
                             @endif
-                            
+
                         </tbody>
-                        
-                    </x-data-table>                            
+
+                    </x-data-table>
                     @endif
 
                 </div>

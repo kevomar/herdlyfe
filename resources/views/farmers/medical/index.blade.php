@@ -9,7 +9,7 @@
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
                 @if($medicals)
-                <x-data-table buttonName="medical record" resource="medical">            
+                <x-data-table buttonName="medical record" resource="medical">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th></th>
@@ -47,29 +47,29 @@
                                                 </x-slot>
                                                 <x-slot name="content">
                                                     <x-dropdown-link :href="route('medical.edit', $medical)">
-                                                        {{ __('Edit') }}  
+                                                        {{ __('Edit') }}
                                                     </x-dropdown-link>
-                                                        <form method="POST" action="{{ route('medical.destroy', $medical) }}">
+                                                        {{-- <form method="POST" action="{{ route('medical.destroy', $medical) }}">
                                                             @csrf
                                                             @method('delete')
                                                             <x-dropdown-link :href="route('medical.destroy', $medical)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
                                                                 {{ __('Delete') }}
                                                             </x-dropdown-link>
-                                                        </form>
+                                                        </form> --}}
                                                 </x-slot>
                                             </x-dropdown>
                                         </td>
                                     @endif
                                 </tr>
 
-                                
-                                
-                                
-                                
+
+
+
+
                                 </div>
 
 
-                                
+
                                 @endforeach
                                 @else
                                     <tr class="font-bold text-3xl block items-center">
@@ -80,7 +80,7 @@
                                         </td>
                                     </tr>
                                 @endif
-                                
+
                             </tbody>
                         </table>
                     </div class="bg-transparent">
@@ -93,7 +93,7 @@
                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         {{ __('No Medical records yet') }}
                     </h1>
-                    
+
                 </div>
                 @endif
             </div>

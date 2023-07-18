@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('markets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cattle_id')->constrained('cattle');
+            $table->integer('price');
             $table->timestamps();
         });
     }

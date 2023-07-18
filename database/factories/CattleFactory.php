@@ -27,7 +27,7 @@ class CattleFactory extends Factory
                 'bull', 'cow',
             ]),
             'status' => $this->faker->randomElement([
-                'alive', 'dead',
+                'for sale', 'not for sale',
             ]),
         ];
     }

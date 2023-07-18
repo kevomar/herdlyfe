@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Sale;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('mpesa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cattle_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price', 8, 2);
-            $table->date('listing_date');
-            $table->integer('sale_status')->default(0);
+            $table->string('phone_number');
+            $table->string('amount');
+            $table->string('transaction_code');
+            $table->string('transaction_time');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('mpesa');
     }
 };

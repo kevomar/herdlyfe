@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Herdlyfe</title>
+    <title>Herdlyfe Homepage</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -21,27 +21,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../../../public/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../../public/lib/lightbox/css/lightbox.min.css rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    {{-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
-    </div>
+    </div> --}}
     <!-- Spinner End -->
 
 
-    <!-- Topbar Start -->
-    <!--div class="container-fluid bg-dark px-0">
+    <!-- Topbar Start >
+    <div class="container-fluid bg-dark px-0">
         <div class="row g-0 d-none d-lg-flex">
             <div class="col-lg-6 ps-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center text-light">
@@ -59,8 +59,8 @@
                 </div>
             </div>
         </div>
-    </div-->
-    <!-- Topbar End -->
+    </div>
+    < Topbar End -->
 
 
     <!-- Navbar Start -->
@@ -76,8 +76,6 @@
                 @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
-                    <a href="{{ route('home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-3">Home</a>
-
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-3">Dashboard</a>
                         <a href="{{ url('market') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-3">Marketplace</a>
                         <a href="{{ url('about') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-50 mx-30">About us</a>
@@ -102,134 +100,31 @@
     </nav>
     <!-- Navbar End -->
 
-
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container text-center py-5">
-            <h1 class="display-3 text-white mb-4 animated slideInDown">Cattle</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cattle</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Page Header End -->
-
-
-    <!-- Product Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">Our Products</p>
-                <h1 class="mb-5">Where Cattle Trading Flourishes: Unleash the Power of the Herdlyf Marketplace.</h1>
+    <div class="container">
+        <div class="card">
+            <div class="card-title">
+                <h3 class="text-center">Mpesa Payment</h3>
             </div>
-            {{-- {{ dd($markets) }} --}}
-
-            <div class="row gx-4 gy-3">
-                @if($markets->count() > 0)
-                @foreach($markets as $market)
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="product-item">
-                        <div class="position-relative">
-                            <img class="img-fluid" src="https://placehold.co/300" alt="">
-                            {{-- {{ dd(($market->cattle)) }} --}}
-                            {{-- <div class="product-overlay">
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                            </div> --}}
-                        </div>
-
-                        <div class="text-center p-4">
-                            <a class="d-block h4" href="">{{ $market->cattle->cattle_name }}</a>
-                            @php
-                                $price = (float)$market->price;
-                                $formattedPrice = number_format($market->price, 2, '.', ',');
-                                $cattle = $market->cattle;
-                            @endphp
-                            <a class="d-block h5" href="">{{ 'Ksh '.$formattedPrice }}</a>
-                            <a href="{{ route('market.show', $market) }}">
-                                <button type="button" class="btn btn-primary btn-sm px-3 py-2 mt-3 mx-3">
-                                    View More
-                                </button>
-                            </a>
-                            <a href={{ route('payment', $market->id) }}>
-                                <button type="button" class="btn btn-primary btn-sm px-3 py-2 mt-3">
-                                    Buy now
-                                </button>
-                            </a>
-
-                        </div>
-                    </div>
-
+            <div class="card-body">
+                <form action="{{ route('stkPush') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="numeric" name="phone" id="phone" class="form-control" placeholder="{{ auth()->user()->phone_number }}">
+                    <x-input-error :messages="$errors->get('phone')" />
                 </div>
-                @endforeach
-                @else
-                <h1 class="text-3xl text-center font-bold">
-                    No cattle Available for sale right now
-                </h1>
-                @endif
-
-        </div>
-
-
-    </div>
-    <!-- Product End -->
-
-
-    <!-- Features Start -->
-    <!--div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="section-title bg-white text-start text-primary pe-3">Why Us!</p>
-                    <h1 class="mb-4">Few Reasons Why People Choosing Us!</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Justo magna erat amet</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Clita erat ipsum et lorem et sit</p>
-                    <a class="btn btn-secondary rounded-pill py-3 px-5 mt-3" href="">Explore More</a>
+                <div class="amount">
+                    <label for="amount">Amount</label>
+                    <input type="numeric" name="amount" id="amount" class="form-control" placeholder="Amount" value={{ $market->price }} >
+                    <x-input-error :messages="$errors->get('amount')" />
                 </div>
-                <div class="col-lg-6">
-                    <div class="rounded overflow-hidden">
-                        <div class="row g-0">
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="text-center bg-primary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/experience.png" alt="">
-                                    <h1 class="display-6 text-white" data-toggle="counter-up">25</h1>
-                                    <span class="fs-5 fw-semi-bold text-secondary">Years Experience</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="text-center bg-secondary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/award.png" alt="">
-                                    <h1 class="display-6" data-toggle="counter-up">183</h1>
-                                    <span class="fs-5 fw-semi-bold text-primary">Award Winning</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="text-center bg-secondary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/animal.png" alt="">
-                                    <h1 class="display-6" data-toggle="counter-up">2619</h1>
-                                    <span class="fs-5 fw-semi-bold text-primary">Total Animals</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
-                                <div class="text-center bg-primary py-5 px-4">
-                                    <img class="img-fluid mb-4" src="img/client.png" alt="">
-                                    <h1 class="display-6 text-white" data-toggle="counter-up">51940</h1>
-                                    <span class="fs-5 fw-semi-bold text-secondary">Happy Clients</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-primary w-25">Pay</button>
                 </div>
+                </form>
             </div>
         </div>
-    </div-->
-    <!-- Features End -->
+    </div>
 
 
     <!-- Footer Start -->
@@ -238,8 +133,8 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Our Office</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>40100, Nairobi Kenya</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+254 796 657 810</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>Herdlyfe@gmail.com</p>
                     <div class="d-flex pt-3">
                         <a class="btn btn-square btn-secondary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
@@ -279,15 +174,14 @@
     <!-- Footer End -->
 
 
-    <!-- Copyright Start -->
-    <div class="container-fluid bg-secondary text-body copyright py-4">
+     <!-- Copyright Start -->
+     <div class="container-fluid bg-secondary text-body copyright py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                     &copy; <a class="fw-semi-bold" href="#">Herdlyfe</a>, All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                     Explore, Connect, and Trade in the Herdlyf Marketplace.
                 </div>
             </div>

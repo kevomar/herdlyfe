@@ -9,7 +9,7 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('cattle.store') }}" method="POST">
+                    <form action="{{ route('cattle.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-4">
@@ -29,20 +29,10 @@
                             <select name="breed" id="breed" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
                                 @foreach($breeds as $breed)
                                     <option value="{{ $breed->id }}">{{ $breed->breed_name }}</option>
-                                @endforeach    
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('breed')" class="mt-2" />
                         </div>
-
-                        {{-- <div class="mb-4">
-                            <x-input-label for="herd" :value="__('Herd')" />
-                            <select name="herd" id="herd" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
-                                @foreach($herds as $herd)
-                                    <option value="{{ $herd->id }}">{{ $herd->herd_name }}</option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('herd')" class="mt-2" />
-                        </div> --}}
 
                         <div class="mb-4">
                             <x-input-label for="gender" :value="__('Gender')" />
@@ -54,15 +44,11 @@
                         </div>
 
                         <div class="mb-4">
-                            <x-input-label for="status" :value="__('Status')" />
-                            <select name="status" id="status" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
-                                <option value="alive">Alive</option>
-                                <option value="dead">Dead</option>
-                            </select>
-                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                            <x-input-label for="image" :value="__('Upload Image')" />
+                            <x-text-input  type="file" name="image" />
+                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         </div>
 
-                        
 
                         <div class="flex items-center justify-between mt-4">
 

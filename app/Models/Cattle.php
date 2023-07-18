@@ -19,6 +19,7 @@ class Cattle extends Model
         'date_of_birth',
         'gender',
         'status',
+        'image'
     ];
 
     protected $dates = [

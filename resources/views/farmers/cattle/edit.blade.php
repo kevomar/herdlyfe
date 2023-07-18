@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-3">
-                <form action="{{route('cattle.update', $cattle)}}" method="POST">
+                <form action="{{route('cattle.update', $cattle)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-4">
@@ -32,7 +32,7 @@
                                 @else
                                     <option value="{{ $breed->id }}">{{ $breed->breed_name }}</option>
                                 @endif
-                            @endforeach  
+                            @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('breed')" class="mt-2" />
                     </div>
@@ -55,20 +55,9 @@
                     </div>
 
                     <div class="mb-4">
-                        <x-input-label for="status" :value="__('Status')" />
-                        <select name="status" id="status" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" value={{ $cattle->status }} required>
-                            @if($cattle->gender == 'alive')
-                                <option value="alive" selected>Alive</option>
-                                <option value="dead">Dead</option>
-                            @elseif($cattle->gender == 'bull')
-                                <option value="alive">Alive</option>
-                                <option value="dead" selecteed>Dead</option>
-                            @else
-                                <option value="alive">Alive</option>
-                                <option value="dead">Dead</option>
-                            @endif
-                        </select>
-                        <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                        <x-input-label for="image" :value="__('Upload Image')" />
+                        <x-text-input  type="file" name="image" :value="old('image', $cattle->image)" />
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-between mt-4 col-span-2 w-3/4 ml-10">

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         Health::factory(1000)->create();
         Breeding::factory(100)->create();
         Feed::factory(10000)->create();
-        Market::factory(100)->create();
+        $this->call([MarketSeede::class]);
 
         User::create([
             'first_name' => 'Admin',

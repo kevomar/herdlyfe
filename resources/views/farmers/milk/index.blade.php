@@ -44,18 +44,18 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            
+
                                             <x-dropdown-link :href="route('milk.edit', $milk)">
-                                                {{ __('Edit') }}  
+                                                {{ __('Edit') }}
                                             </x-dropdown-link>
-                                            
-                                            <form method="POST" action="{{ route('milk.destroy', $milk) }}">
+
+                                            {{-- <form method="POST" action="{{ route('milk.destroy', $milk) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <x-dropdown-link :href="route('milk.destroy', $milk)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
                                                     {{ __('Delete') }}
                                                 </x-dropdown-link>
-                                            </form>
+                                            </form> --}}
                                         </x-slot>
                                     </x-dropdown>
                                 </td>
@@ -82,10 +82,10 @@
                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         {{ __('No MIlk records yet') }}
                     </h1>
-                    
+
                 </div>
                 @endif
-                
+
             </div>
             </section>
      </div>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cattle_id')->constrained()->cascadeOnDelete();
             $table->string('price');
+            $table->string('status')->default();
             $table->timestamps();
             $table->softDeletes();
         });

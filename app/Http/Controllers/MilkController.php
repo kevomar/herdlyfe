@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cattle;
+use App\Models\Market;
 use App\Models\Milk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,15 +24,18 @@ class MilkController extends Controller
         $user = Auth::user();
         $herdId = $user->herd->id;
         //get the milk records whose cattle belong to the owner
-        $milk = Milk::whereHas('cattle', function ($query) use ($herdId) {
-            $query->where('herd_id', $herdId);
-        })->with('cattle', 'cattle.herd', 'cattle.herd.user')->paginate(10);
+        $milk = Milk::join('cattle', 'milks.cattle_id', '=', 'cattle.id')
+            ->join('herds', 'cattle.herd_id', '=', 'herds.id')
+            ->where('herds.id', $herdId)
+            ->select('milks.*')
+            ->latest('date')
+            ->paginate(10);
         // $milk = Milk::where(
         //     'cattle->id',
         //     $herd->cattle->id
         // )->latest('date', 'shift')
         //     ->paginate(10);
-        
+
 
         if (request('search')) {
 
@@ -41,10 +45,11 @@ class MilkController extends Controller
             if ($cattle_id->count() > 0) {
                 foreach ($cattle_id as $id) {
 
-                    $milk = Milk::where('cattle_id', 'like', '%' . $id . '%')
-                        ->orWhere('date', 'like', '%' . request('search') . '%')
-                        ->orWhere('shift', 'like', '%' . request('search') . '%')
-                        ->orWhere('quantity', 'like', '%' . request('search') . '%')
+                    $milk = Milk::join('cattle', 'milks.cattle_id', '=', 'cattle.id')
+                        ->join('herds', 'cattle.herd_id', '=', 'herds.id')
+                        ->select('milks.*')
+                        ->where('cattle_id', 'like', '%' . $id . '%')
+                        ->where('herds.id', $herdId)
                         ->paginate(10);
                 }
             } else {
@@ -149,5 +154,19 @@ class MilkController extends Controller
 
         return to_route('milk.index')
             ->with('success', 'Milk record deleted successfully');
+    }
+
+    /**
+     * Add milk record for a specified cattle
+     * @param int $cattle_id
+     *
+     */
+
+    public function createSpecific($cattle_id)
+    {
+        $cattle = Cattle::find($cattle_id);
+        return view('farmers.milk.create-specific', [
+            'cattle' => $cattle,
+        ]);
     }
 }

@@ -11,9 +11,11 @@ class Market extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'owner_id',
         'cattle_id',
         'price'
     ];
+
 
     public function cattle()
     {

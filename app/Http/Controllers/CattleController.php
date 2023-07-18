@@ -36,15 +36,17 @@ class CattleController extends Controller
 
         $cattle = Cattle::where('herd_id', auth()->user()->herd->id)->get();
         $maleCount = $cattle->where('gender', 'bull')->count();
-        $femaleCount = $cattle->where('gender', 'female')->count();
+        $femaleCount = $cattle->where('gender', 'cow')->count();
         $averageAge = round($cattle->avg(
             fn ($cattle) => $cattle->date_of_birth->diffInYears(now())
         ));
         $cattles = Cattle::where('herd_id', auth()->user()->herd->id)
+            ->latest()
             ->paginate(10);
 
         if (request('search')) {
             $cattles = cattle::where('cattle_name', 'like', '%' . request('search') . '%')
+                ->where('herd_id', auth()->user()->herd->id)
                 ->paginate(10);
         }
         return view('farmers.cattle.index', [
@@ -75,14 +77,16 @@ class CattleController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $validatedData = $request->validate([
             'cattle_name' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
             'breed' => 'required|exists:breeds,id',
             'gender' => 'required|in:bull,cow',
-            'status' => 'required|in:alive,dead',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validatedData['image'] = $request->file('image')->store('cattle', 'public');
+        }
 
         $cattle = Cattle::create([
             'cattle_name' => $validatedData['cattle_name'],
@@ -90,8 +94,10 @@ class CattleController extends Controller
             'breed_id' => $validatedData['breed'],
             'herd_id' => auth()->user()->herd->id,
             'gender' => $validatedData['gender'],
-            'status' => $validatedData['status'],
+            'status' => 'not for sale',
+            'image' => $validatedData['image'],
         ]);
+
 
         // $request->user()->cattle()->create($validatedData);
         $cattle->save();
@@ -171,8 +177,11 @@ class CattleController extends Controller
             'date_of_birth' => 'required|date',
             'breed' => 'required|exists:breeds,id',
             'gender' => 'required|in:bull,cow',
-            'status' => 'required|in:alive,dead',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validatedData['image'] = $request->file('image')->store('cattle', 'public');
+        }
 
         $cattle->update($validatedData);
 

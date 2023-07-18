@@ -18,10 +18,14 @@ class MarketFactory extends Factory
      */
     public function definition(): array
     {
+        //get all the cattle for sale
+
         return [
-            'cattle_id' => Cattle::all()->random()->id,
-            //set the price betweeen a hundred and 200 thousand
-            'price' => rand(100000, 200000),
+            'cattle_id' => function() {
+                foreach ($cattle as $cattle) {
+                    return $cattle->id;
+                }
+            },
         ];
     }
 }
