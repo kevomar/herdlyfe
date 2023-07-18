@@ -87,8 +87,10 @@ class MpesaController extends Controller
         $callbackData = $mpesa->getDataFromCallback();
 
         $data = json_decode($callbackData);
+        Log::info(json_encode($data));
         // Access the correct property "ResultDesc" instead of "ResultDec"
         $metadata = $data->Body->StkCallback->CallbackMetadata;
+        return response()->json($metadata);
         $resultCode = $data->Body->StkCallback->ResultCode;
         $amountPaid = $metadata->Item[0]->Value;
         $mpesaReceiptNumber = $metadata->Item[1]->Value;
